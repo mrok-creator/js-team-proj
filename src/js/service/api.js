@@ -31,6 +31,9 @@ async function getPopularFilm(page = 1) {
     data.results.forEach(item => {
       item.genres = getGenresNames(item.genre_ids);
     });
+    data.results.forEach(item => {
+      item.poster_path = getFullImageLink(item.poster_path);
+    });
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -73,8 +76,12 @@ function getGenresNames(genresIds) {
       : '';
     return name;
   });
-  console.log(genresNames);
   return genresNames;
+}
+
+function getFullImageLink(poster_path) {
+  const fullPath = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  return fullPath;
 }
 
 export { getPopularFilm, searchFilmByName, getFilmDescription };
