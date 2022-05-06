@@ -8,7 +8,6 @@
     "dev": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /js-team-proj/"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/goitacademy/parcel-project-template.git"
@@ -25,5 +24,8 @@
     "parcel-plugin-nuke-dist": "^1.0.1",
     "posthtml-include": "^1.6.2",
     "sass": "^1.32.8"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
   }
 }
