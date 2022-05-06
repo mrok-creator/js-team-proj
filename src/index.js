@@ -11,6 +11,7 @@ const instance = basicLightbox.create(`
         <svg  class="modal__icon">
           <use href="/sprite.2b07476a.svg#icon-close" ></use>
         </svg>      
+      <div class="modal__wrapper">
       <img class="modal__img" src="https://upload.wikimedia.org/wikipedia/ru/thumb/c/c7/Doctor_Strange_poster.jpg/640px-Doctor_Strange_poster.jpg" alt="" />
       <span class=""></span>
       <div>
@@ -30,7 +31,7 @@ const instance = basicLightbox.create(`
       <span></span>
       <p></p>
       <button type="button">add to watched</button>
-      <button type="button">add to queue</button>          
+      <button type="button">add to queue</button>      </div>    
     </div>
 `, {
     onShow: (instance) => {

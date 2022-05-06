@@ -1,6 +1,6 @@
 
 .modal{
-    padding: 46px 20px 40px 20px ;
+    padding: 8px 8px 40px 20px ;
     background-color: #fff;
     &__icon{
         padding-top: -20px;
@@ -12,6 +12,10 @@
         stroke: black;
     }
     &__img{
-        width: 240px;
+        width: 240px;      
+        border-radius: 5px;  
+    }
+    &__wrapper{
+        padding-right: 12px;
     }
 }
