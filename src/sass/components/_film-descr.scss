@@ -2,6 +2,7 @@
 .modal{
     padding: 8px 8px 40px 20px ;
     background-color: #fff;
+    max-width: 480px;
     &__icon{
         padding-top: -20px;
         display: block;
@@ -17,5 +18,9 @@
     }
     &__wrapper{
         padding-right: 12px;
+    }
+    &__info{
+        display: flex;
+        justify-content: space-between;
     }
 }
