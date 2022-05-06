@@ -1,0 +1,17 @@
+
+.modal{
+    padding: 46px 20px 40px 20px ;
+    background-color: #fff;
+    &__icon{
+        padding-top: -20px;
+        display: block;
+        margin-left: auto;
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        stroke: black;
+    }
+    &__img{
+        width: 240px;
+    }
+}
