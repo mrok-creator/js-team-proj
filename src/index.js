@@ -1,5 +1,4 @@
 import './sass/main.scss';
-
 import * as basicLightbox from 'basiclightbox'
 // function get() {
 //     fetch("https://api.themoviedb.org/3/movie/629542/images?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US")
