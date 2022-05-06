@@ -6,9 +6,9 @@
     width: 480px;
   }
   @include tab {
-    width: 740px;
+    width: 768px;
   }
   @include desk {
-    width: 1090px;
+    width: 1024px;
   }
 }
