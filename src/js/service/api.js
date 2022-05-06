@@ -19,7 +19,6 @@ async function getGenresDescr() {
   try {
     const { data } = await instance.get(`/genre/movie/list`);
     genres = data.genres;
-    console.log(genres);
   } catch (error) {
     console.error(error);
   }
