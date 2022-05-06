@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Titan+One&display=swap');
+// Стили для файла с примером HTML-фрагмента
+@import './base/modern-normalize';
+
+@import './utils/mixins';
+@import './utils/variables';
+
+@import './utils/container';
+@import './utils/visually-hidden';
+
+@import './components/header';
+
+@import './components/gallery';
+@import './components/film-descr';
+@import './components/footer';
+@import './components/developers';
