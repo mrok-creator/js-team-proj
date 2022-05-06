@@ -6,7 +6,7 @@ const instance = axios.create({
   },
 });
 
-let genresArr = null;
+let genres = null;
 
 // https://api.themoviedb.org/wRnbWt44nKjsFPrqSmwYki5vZtF.jpg
 // ! 453647fe51ddb15dbe812a48a21b448b
@@ -15,18 +15,23 @@ let genresArr = null;
 // ?3/genre/movie/list?api_key=<<api_key>>&language=en-US  //genres
 // ?3/movie/mId?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-USg //movie by id
 
-async function getPopularFilm(page = 1) {
-  //   const trendFilms = '3/trending/all/day';
-  //   const filmsGenres = '3/genre/movie/list';
+async function getGenresDescr() {
+  try {
+    const { data } = await instance.get(`/genre/movie/list`);
+    genres = data.genres;
+  } catch (error) {
+    console.error(error);
+  }
+}
+getGenresDescr();
 
+async function getPopularFilm(page = 1) {
   try {
     const { data } = await instance.get(`trending/all/day`, {
       params: {
         page,
       },
     });
-    const genre = await instance.get(`/genre/movie/list`);
-    genresArr = genre.data.genres;
 
     data.results.forEach(item => {
       item.genres = getGenresNames(item.genre_ids);
@@ -34,12 +39,10 @@ async function getPopularFilm(page = 1) {
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
-    console.log(data);
   } catch (error) {
     console.error(error);
   }
 }
-
 async function searchFilmByName(query, page = 1) {
   try {
     const { data } = await instance.get(`search/movie`, {
@@ -50,9 +53,16 @@ async function searchFilmByName(query, page = 1) {
         query,
       },
     });
-    return data;
+
+    data.results.forEach(item => {
+      item.genres = getGenresNames(item.genre_ids);
+    });
+
+    data.results.forEach(item => {
+      item.poster_path = getFullImageLink(item.poster_path);
+    });
   } catch (error) {
-    console.log(error.text);
+    console.log(error);
   }
 }
 
@@ -71,9 +81,7 @@ async function getFilmDescription(filmId) {
 
 function getGenresNames(genresIds) {
   const genresNames = genresIds.map(id => {
-    const { name } = genresArr.find(item => item.id === id)
-      ? genresArr.find(item => item.id === id)
-      : '';
+    const { name } = genres.find(item => item.id === id) ? genres.find(item => item.id === id) : '';
     return name;
   });
   return genresNames;
