@@ -2,7 +2,9 @@
 .modal{
     padding: 8px 8px 40px 20px ;
     background-color: #fff;
-    max-width: 480px;
+    max-width: 87.5vw;
+    font-size: 12px;
+    line-height: 16px;
     &__icon{
         padding-top: -20px;
         display: block;
@@ -13,14 +15,44 @@
         stroke: black;
     }
     &__img{
-        width: 240px;      
+        max-width: 280px;
         border-radius: 5px;  
     }
     &__wrapper{
         padding-right: 12px;
     }
+    &__name{
+        margin-top: 20px;
+    }
     &__info{
+        margin-top: 20px;
+        margin-bottom: 20px;
         display: flex;
         justify-content: space-between;
+        &>ul>li:not(:last-child){
+            margin-bottom: 8px;
+        }
+    }
+    &__descr{
+        margin: 20px 0 20px 0;
+    }
+    &__buttons{
+        display: flex;
+        justify-content: space-between;
+    }
+    &__button{
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid black;
+        width: 110px;
+        height: 44px;
+        cursor: pointer;        
+        transition: all .3s cubic-bezier(.38, .53, .8, .71);
+        &:hover,
+        &:focus{
+            background-color: #FF6B01;
+            border-color: #FF6B01;
+            color: white;
+        }
     }
 }

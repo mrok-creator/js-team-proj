@@ -11,8 +11,8 @@ function get() {
           <use href="/sprite.2b07476a.svg#icon-close" ></use>
         </svg>      
       <div class="modal__wrapper">
-      <img class="modal__img" src="https://upload.wikimedia.org/wikipedia/ru/thumb/c/c7/Doctor_Strange_poster.jpg/640px-Doctor_Strange_poster.jpg" alt="" />
-      <div class="modal__name">${r.original_title}</div>
+      <img class="modal__img" src="https://image.tmdb.org/t/p/w500${r.poster_path}" alt="" />
+      <div class="modal__name">${r.title.toUpperCase()}</div>
       <div class="modal__info">
         <ul class="modal__keys">
           <li class="modal__key">Vote / Votes</li>
@@ -21,21 +21,20 @@ function get() {
           <li class="modal__key">Genre</li>
         </ul>
         <ul class="modal__values">
-          <li class="modal__values>${r.vote_average} / ${r.vote_count}</li>
-          <li class="modal__values>${r.popularity}</li>
-          <li class="modal__values>${r.original_title}</li>
-          <li class="modal__values>${r.genres.map(e =>e.name)}</li>
+          <li class="modal__values"><span>${r.vote_average}</span> / ${r.vote_count}</li>
+          <li class="modal__values">${r.popularity}</li>
+          <li class="modal__values">${r.original_title}</li>
+          <li class="modal__values">${r.genres.map(e =>e.name)}</li>
         </ul>
       </div>
-      <span></span>
-      <p></p>
-      <button type="button">add to watched</button>
-      <button type="button">add to queue</button>      </div>    
+      <div>ABOUT</div>
+      <p class="modal__descr">${r.overview}</p>      
+      <div class="modal__buttons"><button class="modal__button modal__button-watched" type="button">ADD TO WATCHED</button>
+      <button class="modal__button modal__button-q"type="button">ADD TO QUEUE</button></button> </div>   
     </div>
 `
             createBox(markup)
-            console.log(r)
-            console.log(r.genres.map(e =>e.name))
+            console.log(r)            
         })
 }
 
