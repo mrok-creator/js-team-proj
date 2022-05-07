@@ -67,6 +67,10 @@
         @include tab{
             margin-top: 0;
         }
+        @include desk{
+            font-size: 30px;
+
+        }
     }
     &__info{        
         margin-top: 20px;
@@ -85,10 +89,13 @@
             grid-row-gap: 5px;
             grid-column-gap: 20px;
             grid-template-columns: auto auto;
-        color: #8C8C8C;
+        
         @include desk{
             margin-right: 86px;
         }
+    }
+    &__key{
+        color: #8C8C8C;
     }
     &__value>span:first-child{
         background: #FF6B01;
@@ -122,7 +129,7 @@
             line-height: 1.66em;
         }
     }
-    &__buttons{
+    &__buttons{        
         display: flex;
         justify-content: space-between;
         line-height: 1.33em;
@@ -131,6 +138,10 @@
         }
     }
     &__button{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+        align-items: center;
         background-color: #fff;
         border-radius: 5px;
         border: 1px solid black;
@@ -153,6 +164,11 @@
             width: 136px;
         }
     }
+}
+.butttonBaseState{
+background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 .kostyl{
 display: none;

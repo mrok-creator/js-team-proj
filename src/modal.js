@@ -28,11 +28,12 @@ export function makeModal() {
         </div>
         <div>ABOUT</div>
         <p class="modal__descr">${r.overview}</p>      
-        <div class="modal__buttons"><button class="modal__button modal__button-watched" type="button">ADD TO WATCHED</button>
-        <button class="modal__button modal__button-q"type="button">ADD TO QUEUE</button></button> </div>  </div> 
+        <div class="modal__buttons"><div class="modal__button modal__button-watched" >ADD TO WATCHED</div>
+        <div class="modal__button modal__button-q">ADD TO QUEUE</button></div> </div>  </div> 
         </div>
         </div>`
-            createBox(markup)                      
+            createBox(markup)    
+            makeButtonAction()
         })
 }
 
@@ -44,5 +45,24 @@ function createBox(markup) {
 })
     instance.show()
 }
-
+function makeButtonAction() {
+    const watched = document.querySelector(".modal__button-watched")    
+    const q = document.querySelector(".modal__button-q")
+    watched.addEventListener("click", e => {
+        console.log()
+        if (watched.textContent === "ADD TO WATCHED") {
+            watched.textContent = "REMOVE FROM WATCHED"
+        }else{
+            watched.textContent = "ADD TO WATCHED"
+        }    
+    })
+    q.addEventListener("click", e => {
+        console.log()
+        if (q.textContent === "ADD TO QUEUE") {
+            q.textContent = "REMOVE FROM QUEUE"
+        }else{
+            q.textContent = "ADD TO QUEUE"
+        }    
+})
+}
 makeModal()
