@@ -1,11 +1,11 @@
 import './sass/main.scss';
 import * as basicLightbox from 'basiclightbox'
 
-export function makeModal() {
-    fetch("https://api.themoviedb.org/3/movie/453395?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US")
+export function makeFilmModal(id) {
+    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US`)
         .then(r => { return r.json() })
         .then(r => {
-           const markup = `
+            const markup = `
         <div class="modal">          
         <svg  class="modal__icon">
             <use href="/sprite.2b07476a.svg#icon-close" ></use>
@@ -33,7 +33,7 @@ export function makeModal() {
         </div>
         </div>`
             createBox(markup)    
-            makeButtonAction()
+            makeButtonAction(id)
         })
 }
 
@@ -45,24 +45,53 @@ function createBox(markup) {
 })
     instance.show()
 }
-function makeButtonAction() {
-    const watched = document.querySelector(".modal__button-watched")    
+function makeButtonAction(id) {
+    const watched = document.querySelector(".modal__button-watched")
     const q = document.querySelector(".modal__button-q")
-    watched.addEventListener("click", e => {
-        console.log()
-        if (watched.textContent === "ADD TO WATCHED") {
+    let watchList = JSON.parse(localStorage.getItem("watched"))     
+        if (!watchList) {
+                watchList = []
+    }
+    
+    
+    if (watchList.includes(id)) {        
+            watched.classList.add("butttonActiveState");
             watched.textContent = "REMOVE FROM WATCHED"
-        }else{
+    }
+    
+    watched.addEventListener("click", () => {
+        watched.classList.toggle("butttonActiveState")
+        if (watched.textContent === "ADD TO WATCHED") {     
+            watchList.push(id)
+            localStorage.setItem(`watched`, JSON.stringify(watchList))
+            watched.textContent = "REMOVE FROM WATCHED"
+        } else {
+            watchList.splice(watchList.indexOf(id),1)
+            localStorage.setItem("watched",JSON.stringify(watchList))
             watched.textContent = "ADD TO WATCHED"
-        }    
-    })
-    q.addEventListener("click", e => {
-        console.log()
-        if (q.textContent === "ADD TO QUEUE") {
+        }
+    })    
+    let queueList = JSON.parse(localStorage.getItem("queued"))     
+        if (!queueList) {
+                queueList = []
+    }
+    
+    
+    if (queueList.includes(id)) {        
+            q.classList.add("butttonActiveState");
             q.textContent = "REMOVE FROM QUEUE"
-        }else{
+    }
+    
+    q.addEventListener("click", () => {
+        q.classList.toggle("butttonActiveState")
+        if (q.textContent === "ADD TO QUEUE") {     
+            queueList.push(id)
+            localStorage.setItem(`queued`, JSON.stringify(queueList))
+            q.textContent = "REMOVE FROM QUEUE"
+        } else {
+            queueList.splice(queueList.indexOf(id),1)
+            localStorage.setItem("queued",JSON.stringify(queueList))
             q.textContent = "ADD TO QUEUE"
-        }    
-})
+        }
+    }) 
 }
-makeModal()
