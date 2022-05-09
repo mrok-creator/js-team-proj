@@ -1,10 +1,12 @@
 import {searchFilmByName} from './js/service/api';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
-import { input } from './js/ref';
-const onInputSearch = (e) => {
-    const inputValue = e.target.value.trim();
+import { input , form} from './js/ref';
+import {searchFilmMarkup} from './js/markup.js'
 
+const onInputSearch = (e) => {
+    e.preventDefault();
+    const inputValue = e.target.query.value.trim();
   if (inputValue.length === 0) {
         return
     };
@@ -15,7 +17,7 @@ const onInputSearch = (e) => {
             if (res.results.length < 1) {
                 Notify.warning('Халепа! Такого фільму не існує😪');
             } else {
-                console.log(res.results)
+                searchFilmMarkup(res.results)
             }
         })
         .catch(error => {
@@ -26,6 +28,6 @@ const onInputSearch = (e) => {
 
 const debounceOnInputSearch = debounce(onInputSearch, 500);
 
-const listenerForInput = input.addEventListener('input', debounceOnInputSearch);
+const listenerForInput = form.addEventListener('submit', onInputSearch);
 
 export { debounceOnInputSearch, listenerForInput };
