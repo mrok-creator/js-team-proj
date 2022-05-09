@@ -5,6 +5,7 @@ export function makeFilmModal(id) {
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US`)
         .then(r => { return r.json() })
         .then(r => {
+            
             const markup = `
         <div class="modal">          
         <svg  class="modal__icon">
@@ -23,13 +24,18 @@ export function makeFilmModal(id) {
             <li class="modal__key">Original Title</li>
             <li class="modal__value">${r.original_title}</li>
             <li class="modal__key">Genre</li>
-            <li class="modal__value">${r.genres.map(e =>e.name)}</li>
+            <li class="modal__value">${r.genres.map(e =>" " + e.name  )}</li>
         </ul>
         </div>
         <div>ABOUT</div>
-        <p class="modal__descr">${r.overview}</p>      
-        <div class="modal__buttons"><div class="modal__button modal__button-watched" >ADD TO WATCHED</div>
-        <div class="modal__button modal__button-q">ADD TO QUEUE</button></div> </div>  </div> 
+        <p class="modal__descr">${r.overview}</p> 
+        <div class="modal__button modal__button--trailer" >WATCH TRAILER</div>      
+        <div class="modal__buttons">
+        
+        <div class="modal__button modal__button--watched" >ADD TO WATCHED</div>
+        <div class="modal__button modal__button--q">ADD TO QUEUE</button></div> 
+        </div> 
+        </div> 
         </div>
         </div>`
             createBox(markup)    
@@ -39,15 +45,21 @@ export function makeFilmModal(id) {
 
 function createBox(markup) {
     const instance = basicLightbox.create(markup, {
-    onShow: (instance) => {
+        onShow: (instance) => {
+            window.addEventListener("keydown", (e) => {                
+                if (e.keyCode == 27) {                    
+                    instance.close()
+                }
+            })
         instance.element().querySelector('svg').onclick = instance.close
     }
 })
     instance.show()
 }
 function makeButtonAction(id) {
-    const watched = document.querySelector(".modal__button-watched")
-    const q = document.querySelector(".modal__button-q")
+    const trailer = document.querySelector(".modal__button--trailer")
+    const watched = document.querySelector(".modal__button--watched")
+    const q = document.querySelector(".modal__button--q")
     let watchList = JSON.parse(localStorage.getItem("watched"))     
         if (!watchList) {
                 watchList = []
@@ -60,8 +72,8 @@ function makeButtonAction(id) {
     }
     
     watched.addEventListener("click", () => {
-        watched.classList.toggle("butttonActiveState")
-        if (watched.textContent === "ADD TO WATCHED") {     
+        watched.classList.toggle("butttonActiveState")        
+        if (!watchList.includes(id)) {     
             watchList.push(id)
             localStorage.setItem(`watched`, JSON.stringify(watchList))
             watched.textContent = "REMOVE FROM WATCHED"
@@ -84,7 +96,7 @@ function makeButtonAction(id) {
     
     q.addEventListener("click", () => {
         q.classList.toggle("butttonActiveState")
-        if (q.textContent === "ADD TO QUEUE") {     
+        if (!queueList.includes(id)) {     
             queueList.push(id)
             localStorage.setItem(`queued`, JSON.stringify(queueList))
             q.textContent = "REMOVE FROM QUEUE"
@@ -94,4 +106,18 @@ function makeButtonAction(id) {
             q.textContent = "ADD TO QUEUE"
         }
     }) 
+    trailer.addEventListener("click", () => {
+        fetch(`https://api.themoviedb.org/3/movie/${id}}/videos?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US`)
+            .then(r => r.json())
+            .then(r => {
+                
+                if (r.results.length === 0) {                                    
+                    const instance2 = basicLightbox.create(`<div class="sorry-text">а де?</div>`) 
+                    instance2.show()
+                } else {
+                    const instance2 = basicLightbox.create(`
+                <iframe src="https://www.youtube.com/embed/${ r.results[0].key }" width="560" height="315"  frameborder="0"></iframe>`)
+                instance2.show()}
+            })        
+    })
 }
