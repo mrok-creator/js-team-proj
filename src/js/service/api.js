@@ -76,6 +76,7 @@ async function getFilmDescription(filmId) {
         language: 'en - US',
       },
     });
+
     return data;
   } catch (error) {
     console.log(error.text);
@@ -91,7 +92,7 @@ function getGenresNames(genresIds) {
 }
 
 function getFullImageLink(poster_path) {
-  const fullPath = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  const fullPath = `https://image.tmdb.org/t/p/w500${poster_path}`;
   return fullPath;
 }
 

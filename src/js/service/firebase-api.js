@@ -9,23 +9,26 @@ import {
   signOut,
 } from 'firebase/auth';
 
+import { authAccess, authDecline } from '../../index.js';
+
 // init all needed firebase features
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const db = getDatabase();
 
+let userId = null;
 // needed function
 
 // !  use to signUp user
 onAuthStateChanged(auth, user => {
   if (user) {
-    //  authAccess(user); // todo function which work when authentication successfully ======= optional
+    authAccess(user); // todo function which work when authentication successfully ======= optional
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     // ...
   } else {
-    // authDecline(); // todo function which work when authentication declined  ======= optional
+    authDecline(); // todo function which work when authentication declined  ======= optional
     // User is signed out
     // ...
   }
@@ -35,6 +38,7 @@ onAuthStateChanged(auth, user => {
 function authWithPopup() {
   signInWithPopup(auth, provider)
     .then(result => {
+      userId = auth.currentUser.uid;
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -67,7 +71,7 @@ function onClickSignOut() {
 
 // ! use to add object to firebase
 function pushData(data, key) {
-  push(ref(db, key), data)
+  push(ref(db, key + userId), data)
     .then(() => {
       console.log(`success`);
       // Data saved successfully!
@@ -79,7 +83,7 @@ function pushData(data, key) {
 }
 
 function getFromFirebase(key) {
-  return get(ref(db, key))
+  return get(ref(db, key + userId))
     .then(snapshot => {
       if (snapshot.exists()) {
         return Object.values(snapshot.val());
