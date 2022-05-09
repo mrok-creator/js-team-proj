@@ -1,0 +1,88 @@
+.gallery{
+    background: #E5E5E5;
+}
+
+.list_films{
+    background: #E5E5E5;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.movies{
+    width: 309px;
+    padding-bottom: 20px;
+    @include desk{
+    
+        margin-right: 15px;
+        &:nth-child(3n + 0) {
+                margin-right: 0;
+        }
+    }
+    @include tab{
+        &:nth-child(2n + 1) {
+                // margin-right: 30px;
+            }
+    }
+    @include mobile{
+        flex-direction: column
+    }
+    
+    &__link{
+       
+    }
+    &__img{
+    width: 309px;
+    height: 449px;
+
+    border-radius: 5px;
+    }
+    &__wrapper{
+
+    }
+    &__name{
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 16px;
+
+        color: #000000;
+    }
+    &__wrapper--data{
+    
+    }
+    &__genre{
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+
+    color: #FF6B01;
+    }
+    &__year{
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+
+    color: #FF6B01;
+    }
+    &__rating{
+    padding: 1px 10px;
+    border-radius: 5px;
+
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+
+    color: #ffff;
+    background-color: #FF6B01;
+    }
+}

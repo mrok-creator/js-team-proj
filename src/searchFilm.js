@@ -2,7 +2,7 @@ import {searchFilmByName} from './js/service/api';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
 import { input , form} from './js/ref';
-import {searchFilmMarkup} from './js/markup.js'
+import {markupFunction} from './js/markup.js'
 
 const onInputSearch = (e) => {
     e.preventDefault();
@@ -25,9 +25,16 @@ const onInputSearch = (e) => {
         });
 };
 
+const searchFilmMarkup = async (em) => {
+    try {
+        markupFunction(em)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 const debounceOnInputSearch = debounce(onInputSearch, 500);
-
 const listenerForInput = form.addEventListener('submit', onInputSearch);
 
 export { debounceOnInputSearch, listenerForInput };
