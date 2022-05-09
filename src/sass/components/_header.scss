@@ -1,0 +1,228 @@
+.header {
+    height: 230px;
+    background-color: $footer-bg;
+    background-size: cover;
+    background-position: center;
+}
+
+.header-box {
+    padding-top: 46px;
+    padding-bottom: 20px;
+    @include tab {
+        padding-top: 41px;
+        padding-bottom: 37px;
+    }
+}
+
+.header-home {
+    @include less-tab {
+        width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-phone.png');
+        @media (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-phone@2x.png');
+        }
+    }
+    @include tab {
+        width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-tab.png');
+        @media (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-tab@2x.png');
+        }
+    }
+    @include desk {
+        width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-pc.png');
+        @media (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-pc@2x.png');
+        }
+    }
+}
+
+.header-library {
+    @include less-tab {
+        width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-phone.png');
+        @media (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-phone@2x.png');
+        }
+        @include tab {
+            width: 768px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-tab.png');
+            @media (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-tab@2x.png');
+            }
+        }
+        @include desk {
+            width: 1280px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-pc.png');
+            @media (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header-pc@2x.png');
+            }
+        }
+    }
+}
+
+.header-home .library-menu,
+.header-library .search-form {
+    display: none;
+}
+
+.header-home .home-button.active-page::after,
+.header-library .library-button.active-page::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 3px;
+    left: 0px;
+    bottom: -3px;
+    background-color: $accent-color;
+}
+
+.nav {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: baseline;
+    &__img {
+        display: block;
+    }
+    &__title {
+        display: none;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.17;
+        color: white;
+        @media screen and (min-width: 768px) {
+            display: block;
+            margin-left: 10px;
+        }
+    }
+}
+
+.menu {
+    display: flex;
+    &__item {
+        position: relative;
+    }
+    &__item:not(:last-child) {
+        margin-right: 39px;
+    }
+    &__button {
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-color: inherit;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.16;
+        text-transform: uppercase;
+        color: $header-text;
+    }
+}
+
+.search-form {
+    margin: 0 auto;
+    margin-top: 41px;
+    margin-bottom: 64px;
+    position: relative;
+    @media screen and (min-width: 768px) {
+        // margin-top: 43px;
+        width: 336px;
+        margin-top: 41px;
+        margin-bottom: 40px;
+    }
+    @media screen and (min-width: 1024px) {
+        margin-bottom: 37px;
+    }
+    &__input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        caret-color: $header-text;
+        border-bottom: 0.5px solid $header-text;
+        background-color: inherit;
+        color: $header-text;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.14;
+    }
+    &__input::placeholder {
+        color: $header-text;
+    }
+    &__button {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        bottom: 6px;
+        right: 1px;
+        padding: 0;
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+    }
+    &__input:focus::placeholder {
+        color: transparent;
+    }
+}
+
+.search-form__button .button__img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.library-menu {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 51px;
+    margin-bottom: 29px;
+    text-align: center;
+    @media screen and (min-width: 768px) {
+        display: block;
+        margin-top: 45px;
+        margin-bottom: 13px;
+    }
+}
+
+.button {
+    width: 129.53px;
+    height: 44px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-align: center;
+    text-transform: uppercase;
+    color: $header-text;
+    background: transparent;
+    border: 1px solid $header-text;
+    border-radius: 5px;
+    cursor: pointer;
+    @media screen and (min-width: 768px) {
+        width: 136px;
+    }
+    &:hover,
+     :focus {
+        border: 1px solid $shadow-btn;
+        background: $accent-color;
+        box-shadow: $footer-bg;
+        transition: background-color $cubic-bezier;
+    }
+    &:not(:last-child) {
+        @media screen and (min-width: 768px) {
+            margin-right: 15px;
+        }
+    }
+    &__active {
+        border: 1px solid $shadow-btn;
+        background: $accent-color;
+        box-shadow: $shadow-btn;
+    }
+}
