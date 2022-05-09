@@ -1,0 +1,98 @@
+import axios from 'axios';
+const instance = axios.create({
+  baseURL: 'https://api.themoviedb.org/3/',
+  params: {
+    api_key: '453647fe51ddb15dbe812a48a21b448b',
+  },
+});
+
+let genres = null;
+
+// https://api.themoviedb.org/wRnbWt44nKjsFPrqSmwYki5vZtF.jpg
+// ! 453647fe51ddb15dbe812a48a21b448b
+
+// ? 3/trending/all/day?api_key=<<api_key>> //trends
+// ?3/genre/movie/list?api_key=<<api_key>>&language=en-US  //genres
+// ?3/movie/mId?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-USg //movie by id
+
+async function getGenresDescr() {
+  try {
+    const { data } = await instance.get(`/genre/movie/list`);
+    genres = data.genres;
+  } catch (error) {
+    console.error(error);
+  }
+}
+getGenresDescr();
+
+async function getPopularFilm(page = 1) {
+  try {
+    const { data } = await instance.get(`trending/all/day`, {
+      params: {
+        page,
+      },
+    });
+
+    data.results.forEach(item => {
+      item.genres = getGenresNames(item.genre_ids);
+    });
+    data.results.forEach(item => {
+      item.poster_path = getFullImageLink(item.poster_path);
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function searchFilmByName(query, page = 1) {
+  try {
+    const { data } = await instance.get(`search/movie`, {
+      params: {
+        page,
+        language: 'en - US',
+        include_adult: false,
+        query,
+      },
+    });
+
+    data.results.forEach(item => {
+      item.genres = getGenresNames(item.genre_ids);
+    });
+
+    data.results.forEach(item => {
+      item.poster_path = getFullImageLink(item.poster_path);
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getFilmDescription(filmId) {
+  try {
+    const { data } = await instance.get(`movie/${filmId}`, {
+      params: {
+        language: 'en - US',
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error.text);
+  }
+}
+
+function getGenresNames(genresIds) {
+  const genresNames = genresIds.map(id => {
+    const { name } = genres.find(item => item.id === id) ? genres.find(item => item.id === id) : '';
+    return name;
+  });
+  return genresNames;
+}
+
+function getFullImageLink(poster_path) {
+  const fullPath = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  return fullPath;
+}
+
+export { getPopularFilm, searchFilmByName, getFilmDescription };

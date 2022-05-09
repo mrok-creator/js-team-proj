@@ -17,9 +17,9 @@
 }
 
 @mixin desk {
-    @media screen and (min-width: 1024px) {
-        @content;
-    }
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
 }
 
 @mixin less-desk {
