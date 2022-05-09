@@ -15,9 +15,10 @@ let genres = null;
 // ?3/genre/movie/list?api_key=<<api_key>>&language=en-US  //genres
 // ?3/movie/mId?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-USg //movie by id
 
+// getGenresDescr вытягивает МАССИВ с ОБЬЕКТАМИ в которых есть АЙДИ и НАЗВАНИЕ ЖАНРОВ
 async function getGenresDescr() {
   try {
-    const { data } = await instance.get(`/genre/movie/list`);
+    const { data } = await instance.get('/genre/movie/list');
     genres = data.genres;
   } catch (error) {
     console.error(error);
@@ -25,6 +26,8 @@ async function getGenresDescr() {
 }
 getGenresDescr();
 
+
+//запускает и показывает обьект с первой страницей в которой обьект на 20 фильмов
 async function getPopularFilm(page = 1) {
   try {
     const { data } = await instance.get(`trending/all/day`, {
@@ -32,17 +35,18 @@ async function getPopularFilm(page = 1) {
         page,
       },
     });
-
     data.results.forEach(item => {
       item.genres = getGenresNames(item.genre_ids);
     });
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
+    return data.results
   } catch (error) {
     console.error(error);
   }
 }
+getPopularFilm()
 async function searchFilmByName(query, page = 1) {
   try {
     const { data } = await instance.get(`search/movie`, {
@@ -85,6 +89,7 @@ function getGenresNames(genresIds) {
     return name;
   });
   return genresNames;
+  
 }
 
 function getFullImageLink(poster_path) {
