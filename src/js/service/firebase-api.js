@@ -66,8 +66,8 @@ function onClickSignOut() {
 }
 
 // ! use to add object to firebase
-function pushData(data) {
-  push(ref(db, 'starred-film'), data)
+function pushData(data, key) {
+  push(ref(db, key), data)
     .then(() => {
       console.log(`success`);
       // Data saved successfully!
@@ -79,7 +79,7 @@ function pushData(data) {
 }
 
 function getFromFirebase(key) {
-  return get(ref(db, 'starred-film'))
+  return get(ref(db, key))
     .then(snapshot => {
       if (snapshot.exists()) {
         return Object.values(snapshot.val());
