@@ -39,10 +39,12 @@ async function getPopularFilm(page = 1) {
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
+    return data;
   } catch (error) {
     console.error(error);
   }
 }
+
 async function searchFilmByName(query, page = 1) {
   try {
     const { data } = await instance.get(`search/movie`, {
@@ -61,6 +63,7 @@ async function searchFilmByName(query, page = 1) {
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
+    return data;
   } catch (error) {
     console.log(error);
   }
