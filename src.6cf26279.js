@@ -116,4 +116,4 @@ var e=require("process");Object.defineProperty(exports,"__esModule",{value:!0}),
 },{"./firebase-config":"jTKq","firebase/database":"Uuoh","firebase/app":"OJEJ","firebase/auth":"zKjx"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss");var e=require("./js/service/api"),s=require("./js/service/firebase-api");
 },{"./sass/main.scss":"clu1","./js/service/api":"FG8s","./js/service/firebase-api":"BtIT"}]},{},["Focm"], null)
-//# sourceMappingURL=/js-team-proj/src.f0361ae4.js.map
+//# sourceMappingURL=/js-team-proj/src.6cf26279.js.map
