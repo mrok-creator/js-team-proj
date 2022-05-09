@@ -6,6 +6,10 @@
     max-width: 420px;
     font-size: 12px;
     line-height: 1.33em;   
+    @include less-tab{
+        overflow: scroll;
+            height: 90vh;
+    }    
     @include tab{        
         max-width: 768px;
         padding-left: 36px;
@@ -22,6 +26,10 @@
         width: 30px;
         cursor: pointer;
         stroke: black;
+        &:hover,
+        &:focus{
+            stroke: #FF6B01;
+        }
     }
     &__img{
         
@@ -29,8 +37,8 @@
         width: 75vw;
         border-radius: 5px;  
         @include tab{
-            width: 34vw;
-            max-width: 270px;
+            max-width: 300;
+            
         }
         @include desk{
             max-width: 375px;
@@ -163,6 +171,9 @@
             margin-right: 16px;
             width: 136px;
         }
+        &--trailer{
+            margin-bottom: 32px;
+        }
     }
 }
 .butttonActiveState{
@@ -172,4 +183,8 @@ background-color: #FF6B01;
 }
 .kostyl{
 display: none;
+}
+.sorry-text{
+    color: #fff;
+    font-size: 50px;
 }
