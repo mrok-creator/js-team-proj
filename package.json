@@ -25,10 +25,10 @@
     "posthtml-include": "^1.6.2",
     "sass": "^1.32.8"
   },
-
   "dependencies": {
     "axios": "^0.27.2",
     "basiclightbox": "^5.0.4",
-    "firebase": "^9.8.0"
+    "firebase": "^9.8.0",
+    "notiflix": "^3.2.5"
   }
 }
