@@ -1,4 +1,5 @@
 .gallery{
+    
     background: #ffffff;
 }
 
@@ -22,6 +23,7 @@
 }
 
 .movies{
+    
     width: 309px;
     padding-bottom: 20px;
     @include mobile {
@@ -48,8 +50,13 @@
     &__img{
     width: 309px;
     height: 449px;
-
+    
     border-radius: 5px;
+    
+    
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
     }
     &__wrapper{
     

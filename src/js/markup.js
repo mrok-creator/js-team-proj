@@ -1,23 +1,20 @@
 import { movieListRef } from './ref';
+
 const markupFunction = arr => {
   const markup = arr
     .map(({ title, name, id, genres, poster_path, release_date, vote_average, first_air_date }) => {
-      const poster = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : ' NOT FOUND';
+      const poster = poster_path
+      
       const filmTitle = title || name;
-      let imgSrc = '';
       
       const genresCard = genres?.join(', ');
       const year = new Date(release_date || first_air_date).getFullYear() || '';
       const rating = vote_average || '0.0';
-      if (poster === 'https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500null') {
-        imgSrc = 'https://miro.medium.com/max/1400/1*cLQUX8jM2bMdwMcV2yXWYA.jpeg'
-      } else {
-        imgSrc = poster;
-      }
+      
       
       return ` <li id='${id}' class="movies">
                         <a href="" class="movies__link">
-                            <img class="movies__img" src="${imgSrc}" alt="${filmTitle}">
+                            <img class="movies__img" src="${poster}" alt="${filmTitle}">
                             <div class="movies__wrapper">
                                 <h2 class="movies__name">${filmTitle}</h2>
                                 <div class="movies__wrapper--data">

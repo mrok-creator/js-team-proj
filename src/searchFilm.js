@@ -39,7 +39,7 @@ const searchFilmMarkup = async (em) => {
 
 
 
-let limit = 1;
+let limit = 2;
 
 const paginationFunc = (arr) => {
     
@@ -63,12 +63,16 @@ const paginationFunc = (arr) => {
             for (const i of visuallyHiddenRm) {
                 i.classList.remove('visually-hidden')
             }
-
+            
             pagination_first.textContent = 1;
             pagination_last.textContent = arr.total_pages;
             return
+        } else {
+            pagination_first.classList.remove('visually-hidden')
+            pagination_first.textContent = 1;
         }
         if (limit < 5) {
+        
         back.disabled = true
     } else {
             back.disabled = false
