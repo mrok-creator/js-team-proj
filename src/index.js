@@ -14,8 +14,12 @@ import { libraryBtn, loginBtn, logOutBtn } from './js/ref';
 
 import { loadPopular } from './js/popularMovie';
 
+import { onScroll, onUpBtnClick } from './js/scroll';
 
 isUserSignIn();
+
+onScroll();
+onUpBtnClick();
 
 loginBtn.addEventListener('click', authWithPopup);
 logOutBtn.addEventListener('click', onClickSignOut);
@@ -31,7 +35,7 @@ function authDecline() {
   hideItems(loginBtn, false);
   hideItems(libraryBtn);
   hideItems(logOutBtn);
-  localStorage.clear()
+  localStorage.clear();
 }
 
 function hideItems(ref, flag = true) {
