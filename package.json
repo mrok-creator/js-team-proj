@@ -30,6 +30,7 @@
     "basiclightbox": "^5.0.4",
     "darkmode-js": "^1.5.7",
     "firebase": "^9.8.0",
+    "nightly.js": "^2.0.1",
     "notiflix": "^3.2.5"
   }
 }
