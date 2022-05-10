@@ -7,3 +7,4 @@ import {
   getFromFirebase,
 } from './js/service/firebase-api';
 import { debounceOnInputSearch, listenerForInput } from './searchFilm';
+
