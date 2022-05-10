@@ -2,33 +2,33 @@ import { searchFilmByName } from './js/service/api';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
 import {
-  input,
-  form,
-  formPagination,
-  next,
-  back,
-  pagination,
-  pagination_last,
-  pagination_first,
+    input,
+    form,
+    formPagination,
+    next,
+    back,
+    pagination,
+    pagination_last,
+    pagination_first,
 } from './js/ref';
 import { markupFunction } from './js/markup.js';
 
 const onInputSearch = (e) => {
     e.preventDefault();
     const inputValue = e.target.query.value.trim();
-  if (inputValue.length === 0) {
+    if (inputValue.length === 0) {
         return
     };
-  
+
     searchFilmByName(inputValue)
         .then(res => {
-      
+
             if (res.results.length < 1) {
                 Notify.warning('Халепа! Такого фільму не існує😪');
             } else {
                 searchFilmMarkup(res.results)
                 paginationFunc(res)
-                
+
             }
         })
         .catch(error => {
@@ -51,14 +51,14 @@ const searchFilmMarkup = async (em) => {
 let limit = 2;
 
 const paginationFunc = (arr) => {
-    
+
     if (limit >= arr.total_pages) {
-                next.disabled = true
-            } else {
-                next.disabled = false
-            }
+        next.disabled = true
+    } else {
+        next.disabled = false
+    }
     for (let i = limit; i <= arr.total_pages; i += 1) {
-        
+
         const markup = `
                 <li class='pagination_item'>
                 <button name='button' class='pagination_button' type='button'>${i}</button>
@@ -72,7 +72,7 @@ const paginationFunc = (arr) => {
             for (const i of visuallyHiddenRm) {
                 i.classList.remove('visually-hidden')
             }
-            
+
             pagination_first.textContent = 1;
             pagination_last.textContent = arr.total_pages;
             return
@@ -81,15 +81,15 @@ const paginationFunc = (arr) => {
             pagination_first.textContent = 1;
         }
         if (limit < 5) {
-        
-        back.disabled = true
-    } else {
+
+            back.disabled = true
+        } else {
             back.disabled = false
-            
+
         }
-        
+
     }
-    
+
 }
 
 back.disabled = true
@@ -101,40 +101,40 @@ const paginationFuncSecond = (e) => {
         limit = limit + 4;
         formPagination.innerHTML = ''
         searchFilmByName(query, page).then(
-            res => {paginationFunc(res)}
+            res => { paginationFunc(res) }
         )
     }
-    
+
     if (e.target.classList.contains('back')) {
         limit = limit - 4;
         formPagination.innerHTML = ''
         searchFilmByName(query, page).then(
-            res => {paginationFunc(res)}
+            res => { paginationFunc(res) }
         )
     }
     if (!e.target.classList.contains('pagination_button')) {
         return
     } else {
-        
+
         searchFilmByName(query, page).then(
             res => {
                 searchFilmMarkup(res.results)
-        }
+            }
         )
     }
     const f = document.querySelectorAll('.pagination_button')
     for (const i of f) {
-        
+
         if (i.classList.contains('current')) {
             i.classList.remove('current')
         } else {
             e.target.classList.add('current')
         }
     }
-    
-    
-    
-    
+
+
+
+
 }
 
 
