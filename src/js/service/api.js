@@ -1,4 +1,5 @@
 import axios from 'axios';
+import notFoundImg from '../../images/poster-img.jpg';
 const instance = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
   params: {
@@ -30,7 +31,7 @@ getGenresDescr();
 //запускает и показывает обьект с первой страницей в которой обьект на 20 фильмов
 async function getPopularFilm(page = 1) {
   try {
-    const { data } = await instance.get(`trending/all/day`, {
+    const { data } = await instance.get(`trending/movie/day`, {
       params: {
         page,
       },
@@ -41,7 +42,7 @@ async function getPopularFilm(page = 1) {
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
-
+    console.log(data)
     return data;
   } catch (error) {
     console.error(error);
@@ -67,6 +68,7 @@ async function searchFilmByName(query, page = 1) {
       item.poster_path = getFullImageLink(item.poster_path);
     });
     return data;
+    
   } catch (error) {
     console.log(error);
   }
@@ -96,7 +98,7 @@ function getGenresNames(genresIds) {
 }
 
 function getFullImageLink(poster_path) {
-  const fullPath = `https://image.tmdb.org/t/p/w500${poster_path}`;
+  const fullPath = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : notFoundImg;
   return fullPath;
 }
 
