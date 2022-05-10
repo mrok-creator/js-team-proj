@@ -2,6 +2,7 @@ import { searchFilmByName } from './service/api';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
 import {
+    first,
     input,
     form,
     formPagination,
@@ -15,6 +16,7 @@ import { markupFunction } from './markup.js';
 
 const onInputSearch = (e) => {
     e.preventDefault();
+    
     const inputValue = e.target.query.value.trim();
     if (inputValue.length === 0) {
         return
@@ -45,9 +47,6 @@ const searchFilmMarkup = async (em) => {
     }
 }
 
-
-
-
 let limit = 2;
 
 const paginationFunc = (arr) => {
@@ -67,8 +66,9 @@ const paginationFunc = (arr) => {
         `
         const a = document.querySelectorAll('.pagination_item')
         formPagination.insertAdjacentHTML('afterbegin', markup);
+       
         if (a.length >= 4) {
-            const visuallyHiddenRm = document.querySelectorAll('.visually-hidden')
+            const visuallyHiddenRm = document.querySelectorAll('.pagVisualHidden')
             for (const i of visuallyHiddenRm) {
                 i.classList.remove('visually-hidden')
             }
@@ -80,10 +80,13 @@ const paginationFunc = (arr) => {
             pagination_first.classList.remove('visually-hidden')
             pagination_first.textContent = 1;
         }
+        
         if (limit < 5) {
-
+            
+            first.classList.add('visually-hidden')
             back.disabled = true
         } else {
+            first.classList.remove('visually-hidden')
             back.disabled = false
 
         }
