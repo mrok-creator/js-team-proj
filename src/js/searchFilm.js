@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
 import {paginationFuncSecondPopular} from './popularMovie'
 import {
+    first,
     input,
     form,
     formPagination,
@@ -19,6 +20,7 @@ import { markupFunction } from './markup.js';
 let isFirst = true
 const onInputSearch = (e) => {
     e.preventDefault();
+    
     const inputValue = e.target.query.value.trim();
     if (inputValue.length === 0) {
         return
@@ -84,6 +86,7 @@ const paginationFunc = (arr) => {
         const a = document.querySelectorAll('.pagination_item')
         if (a.length >= 4) {
             const visuallyHiddenRm =  pagination.querySelectorAll('.visually-hidden')
+
             for (const i of visuallyHiddenRm) {
                 i.classList.remove('visually-hidden')
             }
@@ -95,10 +98,13 @@ const paginationFunc = (arr) => {
             pagination_first.classList.remove('visually-hidden')
             pagination_first.textContent = 1;
         }
+        
         if (limit < 5) {
-
+            
+            first.classList.add('visually-hidden')
             back.disabled = true
         } else {
+            first.classList.remove('visually-hidden')
             back.disabled = false
 
         }

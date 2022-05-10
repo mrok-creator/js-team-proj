@@ -101,7 +101,7 @@ async function makeButtonAction(id) {
                     instance2.show()
                 } else {
                     const instance2 = basicLightbox.create(`
-                <iframe src="https://www.youtube.com/embed/${r.results[0].key}" width="560" height="315"  frameborder="0"></iframe>`)
+                <iframe allow="fullscreen;" src="https://www.youtube.com/embed/${r.results[0].key}" width="560" height="315"  frameborder="0"></iframe>`)
                     instance2.show()
                 }
             })
