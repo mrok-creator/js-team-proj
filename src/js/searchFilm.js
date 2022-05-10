@@ -1,4 +1,4 @@
-import { searchFilmByName } from './js/service/api';
+import { searchFilmByName } from './service/api';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
 import {
@@ -10,8 +10,8 @@ import {
     pagination,
     pagination_last,
     pagination_first,
-} from './js/ref';
-import { markupFunction } from './js/markup.js';
+} from './ref';
+import { markupFunction } from './markup.js';
 
 const onInputSearch = (e) => {
     e.preventDefault();
