@@ -4,8 +4,8 @@ const movieListRef = document.querySelector('.list_films')
 const loadPopular = async ()=>{
     try {
         const movies = await getPopularFilm()
-        console.log(movies)
         const markup = movies.map(({ title, name, id, genres, poster_path, release_date, vote_average, first_air_date }) => {
+            
             const poster = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : " NOT FOUND";
             const filmTitle = title || name;
             const genresCard = genres?.join(', ')
