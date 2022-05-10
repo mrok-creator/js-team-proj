@@ -1,6 +1,7 @@
 import { searchFilmByName } from './service/api';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix';
+import {paginationFuncSecondPopular} from './popularMovie'
 import {
     input,
     form,
@@ -13,6 +14,9 @@ import {
 } from './ref';
 import { markupFunction } from './markup.js';
 
+
+
+let isFirst = true
 const onInputSearch = (e) => {
     e.preventDefault();
     const inputValue = e.target.query.value.trim();
@@ -20,6 +24,18 @@ const onInputSearch = (e) => {
         return
     };
 
+    const f = document.querySelectorAll('.pagination_button')
+    for (const i of f) {
+        if (i.classList.contains('current')) {
+            i.classList.remove('current')
+        }
+    }
+
+    if (isFirst) {
+        pagination.removeEventListener('click', paginationFuncSecondPopular)
+        pagination.addEventListener('click', paginationFuncSecond)
+        isFirst = false
+    }
     searchFilmByName(inputValue)
         .then(res => {
 
@@ -45,10 +61,8 @@ const searchFilmMarkup = async (em) => {
     }
 }
 
-
-
-
 let limit = 2;
+
 
 const paginationFunc = (arr) => {
 
@@ -57,6 +71,7 @@ const paginationFunc = (arr) => {
     } else {
         next.disabled = false
     }
+    formPagination.innerHTML = ''
     for (let i = limit; i <= arr.total_pages; i += 1) {
 
         const markup = `
@@ -65,10 +80,10 @@ const paginationFunc = (arr) => {
                 </li>
             
         `
-        const a = document.querySelectorAll('.pagination_item')
         formPagination.insertAdjacentHTML('afterbegin', markup);
+        const a = document.querySelectorAll('.pagination_item')
         if (a.length >= 4) {
-            const visuallyHiddenRm = document.querySelectorAll('.visually-hidden')
+            const visuallyHiddenRm =  pagination.querySelectorAll('.visually-hidden')
             for (const i of visuallyHiddenRm) {
                 i.classList.remove('visually-hidden')
             }
@@ -137,8 +152,7 @@ const paginationFuncSecond = (e) => {
 
 }
 
-
-pagination.addEventListener('click', paginationFuncSecond)
+// pagination.addEventListener('click', paginationFuncSecond)
 
 const debounceOnInputSearch = debounce(onInputSearch, 500);
 const listenerForInput = form.addEventListener('submit', onInputSearch);
@@ -146,3 +160,4 @@ const listenerForInput = form.addEventListener('submit', onInputSearch);
 export { debounceOnInputSearch, listenerForInput };
 
 const button = document.querySelector('.button__D')
+export {paginationFuncSecond}
