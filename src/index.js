@@ -1,5 +1,6 @@
 import './sass/main.scss';
 import { getPopularFilm, searchFilmByName, getFilmDescription } from './js/service/api';
+
 import {
   authWithPopup,
   onClickSignOut,
@@ -10,6 +11,9 @@ import { makeFilmModal } from './js/modal';
 import { debounceOnInputSearch, listenerForInput } from './js/searchFilm';
 
 import { libraryBtn, loginBtn, logOutBtn } from './js/ref';
+
+import { loadPopular } from './js/popularMovie';
+
 
 isUserSignIn();
 
