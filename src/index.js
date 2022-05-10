@@ -9,6 +9,8 @@ import {
 
 import { libraryBtn, loginBtn, logOutBtn } from './js/ref';
 
+isUserSignIn();
+
 loginBtn.addEventListener('click', authWithPopup);
 logOutBtn.addEventListener('click', onClickSignOut);
 
@@ -30,6 +32,14 @@ function hideItems(ref, flag = true) {
     ref.classList.add('visually-hidden');
   } else {
     ref.classList.remove('visually-hidden');
+  }
+}
+
+async function isUserSignIn() {
+  const userId = localStorage.getItem('userId');
+  if (!userId) {
+    onClickSignOut();
+  } else {
   }
 }
 
