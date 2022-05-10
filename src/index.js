@@ -7,7 +7,7 @@ import {
   getFromFirebase,
 } from './js/service/firebase-api';
 import { makeFilmModal } from './js/modal';
-import { debounceOnInputSearch, listenerForInput } from './searchFilm';
+import { debounceOnInputSearch, listenerForInput } from './js/searchFilm';
 
 import { libraryBtn, loginBtn, logOutBtn } from './js/ref';
 
