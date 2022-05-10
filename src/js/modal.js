@@ -4,8 +4,17 @@ import { makeModalMarkup } from './markup'
 import { getFromFirebase, removeFromFirebase } from './service/firebase-api'
 import { pushData } from './service/firebase-api'
 import { getDatabase, ref, push, onValue, get, key } from 'firebase/database';
+const ul = document.querySelector(".list_films")
+ul.addEventListener("click", (e) => {
+    e.preventDefault()
+    let b = e.target.parentNode.parentNode
 
+    if (b.nodeName == "LI") {
 
+        makeFilmModal(b.id)
+    }
+
+})
 export function makeFilmModal(id) {
     getFilmDescription(id)
         .then(r => {
@@ -28,9 +37,15 @@ function createBox(markup) {
     instance.show()
 }
 async function makeButtonAction(id) {
+
     const trailer = document.querySelector(".modal__button--trailer")
     const watched = document.querySelector(".modal__button--watched")
     const q = document.querySelector(".modal__button--q")
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+        q.style.display = "flex"
+        watched.style.display = "flex"
+    }
     let watchList = await getFromFirebase("watched")
     if (!watchList || !watchList.includes(id)) {
         watched.textContent = "ADD TO WATCHED"
@@ -91,6 +106,5 @@ async function makeButtonAction(id) {
                 }
             })
     })
-    console.log(watchList, queueList)
+
 }
-makeFilmModal(453395)

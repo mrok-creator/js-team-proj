@@ -6,7 +6,7 @@ import {
   pushData,
   getFromFirebase,
 } from './js/service/firebase-api';
-
+import { makeFilmModal } from './js/modal';
 import { debounceOnInputSearch, listenerForInput } from './searchFilm';
 
 import { libraryBtn, loginBtn, logOutBtn } from './js/ref';
@@ -27,6 +27,7 @@ function authDecline() {
   hideItems(loginBtn, false);
   hideItems(libraryBtn);
   hideItems(logOutBtn);
+  localStorage.clear()
 }
 
 function hideItems(ref, flag = true) {
