@@ -105,16 +105,13 @@ const paginationFuncSecond = (e) => {
         
         searchFilmByName(query, page).then(
             res => {
-                
-                console.log('f');
                 searchFilmMarkup(res.results)
         }
         )
     }
     const f = document.querySelectorAll('.pagination_button')
-    console.log(f);
     for (const i of f) {
-        console.log(i);
+        
         if (i.classList.contains('current')) {
             i.classList.remove('current')
         } else {
