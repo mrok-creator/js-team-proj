@@ -7,6 +7,8 @@ import {
   getFromFirebase,
 } from './js/service/firebase-api';
 
+import { debounceOnInputSearch, listenerForInput } from './searchFilm';
+
 import { libraryBtn, loginBtn, logOutBtn } from './js/ref';
 
 isUserSignIn();
