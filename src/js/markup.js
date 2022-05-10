@@ -45,8 +45,9 @@ function makeModalMarkup(r) {
         <div class="modal__info">
         <ul class="modal__keys">
             <li class="modal__key">Vote / Votes</li>
-            <li class="modal__value"><span>${r.vote_average}</span> / <span>${r.vote_count
-    }</span></li>
+            <li class="modal__value"><span>${r.vote_average}</span> / <span>${
+    r.vote_count
+  }</span></li>
             <li class="modal__key">Popularity</li>
             <li class="modal__value">${r.popularity}</li>
             <li class="modal__key">Original Title</li>
@@ -66,8 +67,8 @@ function makeModalMarkup(r) {
         </div > 
         </div > 
         </div >
-        </div > `
-  return markup
+        </div > `;
+  return markup;
 }
 
 export { markupFunction, makeModalMarkup, addMarkup };

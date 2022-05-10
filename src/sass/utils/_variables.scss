@@ -1,20 +1,25 @@
+html {
+  --bg: #fcfcfc;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    color: #000000;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    line-height: 1.94;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  background-color: var(--bg);
+  color: #000000;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.94;
 }
 
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 h1,
@@ -24,15 +29,15 @@ h4,
 h5,
 h6,
 p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
-$accent-color:#FF6B08;
-$header-text:#FFFFFF;
-$main-text:#000000;
-$footer-text:#545454;
-$error-text:#FF001B;
+$accent-color: #ff6b08;
+$header-text: #ffffff;
+$main-text: #000000;
+$footer-text: #545454;
+$error-text: #ff001b;
 $footer-bg: #f7f7f7;
 $shadow-btn: (0px 8px 43px rgba(255, 107, 1, 0.6));
 $cubic-bezier: 250ms cubic-bezier(0.4, 0, 0.2, 1);
