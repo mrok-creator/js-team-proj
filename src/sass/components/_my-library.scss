@@ -1,0 +1,46 @@
+.buttons__container {
+    display: flex;
+}
+
+.buttons__container--header {
+    position: relative;
+    bottom: 45px;
+    justify-content: center;
+    transition: opacity 250ms linear, visibility 250ms linear;
+
+    &.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+.btn-header {
+    cursor: pointer;
+    text-transform: uppercase;
+    height: 44px;
+    border-radius: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+
+    color: #000000;
+    border: 1px solid #000000;
+    width: 130px;
+}
+
+.off {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.on {
+    background-color: #ff6b08;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-header:first-child{
+    margin-right: 15px;
+}

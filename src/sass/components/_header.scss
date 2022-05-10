@@ -67,8 +67,8 @@
     display: none;
 }
 
-.header-home .home-button.active-page::after,
-.header-library .library-button.active-page::after {
+.active-page::after,
+.active-page::after {
     content: '';
     position: absolute;
     display: block;
