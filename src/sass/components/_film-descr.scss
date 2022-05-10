@@ -1,190 +1,222 @@
-
-.modal{
-    padding: 8px 8px 40px 20px ;
+.modal {
+    padding: 8px 8px 40px 20px;
     background-color: #fff;
     width: 87.5vw;
     max-width: 420px;
     font-size: 12px;
-    line-height: 1.33em;   
-    @include less-tab{
+    line-height: 1.33em;
+
+    @include less-tab {
         overflow: scroll;
-            height: 90vh;
-    }    
-    @include tab{        
+        height: 90vh;
+    }
+
+    @include tab {
         max-width: 768px;
         padding-left: 36px;
-    }  
-    @include desk{
+    }
+
+    @include desk {
         padding-left: 16px;
         max-width: 814px;
     }
-    &__icon{
-        
+
+    &__icon {
+
         display: block;
         margin-left: auto;
         height: 30px;
         width: 30px;
         cursor: pointer;
         stroke: black;
+
         &:hover,
-        &:focus{
+        &:focus {
             stroke: #FF6B01;
         }
     }
-    &__img{
-        
-        max-width: 320px;        
+
+    &__img {
+
+        max-width: 320px;
         width: 75vw;
-        border-radius: 5px;  
-        @include tab{
+        border-radius: 5px;
+
+        @include tab {
             max-width: 300;
-            
+
         }
-        @include desk{
+
+        @include desk {
             max-width: 375px;
         }
     }
-    &__data-wrapper{
-        @include tab{
+
+    &__data-wrapper {
+        @include tab {
             max-width: 264px;
         }
-        @include desk{
+
+        @include desk {
             max-width: 391px;
         }
     }
-    &__wrapper{
+
+    &__wrapper {
         text-align: center;
         padding-right: 12px;
-        @include tab{
+
+        @include tab {
             display: flex;
             justify-content: space-between;
             padding-right: 34px;
         }
-        @include desk{
+
+        @include desk {
             padding-right: 8px;
         }
     }
-    &>div{
+
+    &>div {
         text-align: left;
     }
-    &__name{
+
+    &__name {
         font-size: 20px;
         line-height: 1.15em;
-        
+
         margin-top: 20px;
-        @include tab{
+
+        @include tab {
             margin-top: 0;
         }
-        @include desk{
+
+        @include desk {
             font-size: 30px;
 
         }
     }
-    &__info{        
+
+    &__info {
         margin-top: 20px;
         margin-bottom: 20px;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        
-        @include desk{
+
+        @include desk {
             justify-content: flex-start;
 
         }
     }
-    &__keys{
-            display: grid;
-            grid-row-gap: 5px;
-            grid-column-gap: 20px;
-            grid-template-columns: auto auto;
-        
-        @include desk{
+
+    &__keys {
+        display: grid;
+        grid-row-gap: 5px;
+        grid-column-gap: 20px;
+        grid-template-columns: auto auto;
+
+        @include desk {
             margin-right: 86px;
         }
     }
-    &__key{
+
+    &__key {
         color: #8C8C8C;
     }
-    &__value>span:first-child{
+
+    &__value>span:first-child {
         background: #FF6B01;
         color: white;
         border-radius: 5px;
         padding-left: 10px;
         padding-right: 10px;
     }
-    &__value>span:last-child{
+
+    &__value>span:last-child {
         color: black;
         background: #F7F7F7;
         border-radius: 5px;
         padding-left: 10px;
         padding-right: 10px;
     }
+
     &__value:nth-child(2),
-    &__value:first-child{        
+    &__value:first-child {
         line-height: 1.16em;
     }
+
     &__value:nth-child(3),
-    &__value:last-child{
+    &__value:last-child {
         line-height: 1.33em;
     }
-    &__value:nth-child(3){
+
+    &__value:nth-child(3) {
         text-transform: uppercase;
     }
-    &__descr{
-        
+
+    &__descr {
+
         margin: 20px 0 20px 0;
-        @include tab{
+
+        @include tab {
             line-height: 1.66em;
         }
     }
-    &__buttons{        
+
+    &__buttons {
         display: flex;
         justify-content: space-between;
         line-height: 1.33em;
-        @include desk{
+
+        @include desk {
             justify-content: flex-start;
         }
     }
-    &__button{
-    display: flex;
-    text-align: center;
-    justify-content: center;
+
+    &__button {
+        display: flex;
+        text-align: center;
+        justify-content: center;
         align-items: center;
         background-color: #fff;
         border-radius: 5px;
         border: 1px solid black;
         width: 110px;
         height: 44px;
-        cursor: pointer;        
+        cursor: pointer;
         transition: all 0.3s;
+
         &:hover,
-        &:focus{
+        &:focus {
             background-color: #FF6B01;
             border-color: #FF6B01;
             color: white;
         }
-        @include tab{
+
+        @include tab {
             width: 125px;
-        
+
         }
-        @include desk{
+
+        @include desk {
             margin-right: 16px;
             width: 136px;
         }
-        &--trailer{
+
+        &--trailer {
             margin-bottom: 32px;
         }
     }
 }
-.butttonActiveState{
-background-color: #FF6B01;
+
+.butttonActiveState {
+    background-color: #FF6B01;
     border-color: #FF6B01;
     color: white;
 }
-.kostyl{
-display: none;
-}
-.sorry-text{
+
+.sorry-text {
     color: #fff;
     font-size: 50px;
 }
