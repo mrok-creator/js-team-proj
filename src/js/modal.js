@@ -1,8 +1,11 @@
 import * as basicLightbox from 'basiclightbox'
 import { getFilmDescription } from './service/api'
 import { makeModalMarkup } from './markup'
-import { getFromFirebase } from './service/firebase-api'
+import { getFromFirebase, removeFromFirebase } from './service/firebase-api'
 import { pushData } from './service/firebase-api'
+import { getDatabase, ref, push, onValue, get, key } from 'firebase/database';
+
+
 export function makeFilmModal(id) {
     getFilmDescription(id)
         .then(r => {
@@ -29,51 +32,47 @@ async function makeButtonAction(id) {
     const watched = document.querySelector(".modal__button--watched")
     const q = document.querySelector(".modal__button--q")
     let watchList = await getFromFirebase("watched")
-    console.log(watchList)
-    if (!watchList) {
-        watchList = []
-    }
-
-    if (watchList.includes(id)) {
+    if (!watchList || !watchList.includes(id)) {
+        watched.textContent = "ADD TO WATCHED"
+    } else {
         watched.classList.add("butttonActiveState");
         watched.textContent = "REMOVE FROM WATCHED"
-    } else {
-        watched.textContent = "ADD TO WATCHED"
     }
-
     watched.addEventListener("click", () => {
         watched.classList.toggle("butttonActiveState")
-        if (!watchList.includes(id)) {
-            watchList.push(id)
+        if (!watchList || !watchList.includes(id)) {
             pushData(id, "watched")
             watched.textContent = "REMOVE FROM WATCHED"
         } else {
             watchList.splice(watchList.indexOf(id), 1)
-            // delete data pushData(watchList, "watched")
+            removeFromFirebase("watched")
+            watchList.forEach(e => {
+                pushData(e, "watched")
+            });
             watched.textContent = "ADD TO WATCHED"
         }
     })
 
     let queueList = await getFromFirebase("queued")
-
-    if (!queueList) {
-        queueList = []
-    }
-    console.log(queueList)
-    if (queueList.includes(id)) {
+    if (!queueList || !queueList.includes(id)) {
+        q.textContent = "ADD TO QUEUE"
+    } else {
         q.classList.add("butttonActiveState");
         q.textContent = "REMOVE FROM QUEUE"
+
     }
 
     q.addEventListener("click", () => {
         q.classList.toggle("butttonActiveState")
-        if (!queueList.includes(id)) {
-            queueList.push(id)
+        if (!queueList || !queueList.includes(id)) {
             pushData(id, "queued")
             q.textContent = "REMOVE FROM  QUEUE"
         } else {
             queueList.splice(queueList.indexOf(id), 1)
-            // delete q
+            removeFromFirebase("queued")
+            queueList.forEach(e => {
+                pushData(e, "queued")
+            });
             q.textContent = "ADD TO QUEUE"
         }
     })
@@ -92,5 +91,6 @@ async function makeButtonAction(id) {
                 }
             })
     })
+    console.log(watchList, queueList)
 }
 makeFilmModal(453395)

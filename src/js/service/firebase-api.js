@@ -1,5 +1,5 @@
 import { firebaseConfig } from './firebase-config';
-import { getDatabase, ref, push, onValue, get } from 'firebase/database';
+import { getDatabase, ref, push, onValue, get, remove } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -87,20 +87,21 @@ function pushData(data, key) {
       // The write failed...
     });
 }
-// remove()
-// function getFromFirebase(key) {
-//   return get(ref(db, key + userId))
-//     .then(snapshot => {
-//       if (snapshot.exists()) {
-//         return Object.values(snapshot.val());
-//       } else {
-//         console.log('No data available');
-//       }
-//     })
-//     .catch(error => {
-//       console.error(error);
-//     });
-// }
+
+function removeFromFirebase(key) {
+  const userId = localStorage.getItem("userId")
+  return remove(ref(db, key + userId))
+    // .then(snapshot => {
+    //   if (snapshot.exists()) {
+    //     return Object.values(snapshot.val());
+    //   } else {
+    //     console.log('No data available');
+    //   }
+    // })
+    .catch(error => {
+      console.error(error);
+    });
+}
 
 function getFromFirebase(key) {
   const userId = localStorage.getItem('userId');
@@ -126,4 +127,4 @@ function getFromFirebase(key) {
 // updateStarCount(postElement, data);
 // });
 
-export { authWithPopup, onClickSignOut, pushData, getFromFirebase };
+export { authWithPopup, onClickSignOut, pushData, getFromFirebase, removeFromFirebase };
