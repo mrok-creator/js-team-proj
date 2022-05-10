@@ -17,7 +17,8 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const db = getDatabase();
 
-let userId = null;
+// let userId = null;
+
 // needed function
 
 // !  use to signUp user
@@ -38,12 +39,14 @@ onAuthStateChanged(auth, user => {
 function authWithPopup() {
   signInWithPopup(auth, provider)
     .then(result => {
-      userId = auth.currentUser.uid;
+      // userId = ;
+
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      localStorage.setItem('userId', auth.currentUser.uid);
       // ...
     })
     .catch(error => {
@@ -71,9 +74,12 @@ function onClickSignOut() {
 
 // ! use to add object to firebase
 function pushData(data, key) {
+  const userId = localStorage.getItem('userId');
+
   push(ref(db, key + userId), data)
     .then(() => {
       console.log(`success`);
+
       // Data saved successfully!
     })
     .catch(error => {
@@ -81,8 +87,23 @@ function pushData(data, key) {
       // The write failed...
     });
 }
+// remove()
+// function getFromFirebase(key) {
+//   return get(ref(db, key + userId))
+//     .then(snapshot => {
+//       if (snapshot.exists()) {
+//         return Object.values(snapshot.val());
+//       } else {
+//         console.log('No data available');
+//       }
+//     })
+//     .catch(error => {
+//       console.error(error);
+//     });
+// }
 
 function getFromFirebase(key) {
+  const userId = localStorage.getItem('userId');
   return get(ref(db, key + userId))
     .then(snapshot => {
       if (snapshot.exists()) {
@@ -97,12 +118,12 @@ function getFromFirebase(key) {
 }
 
 // ! used to listen data when push to firebase ---- optional
-const starCountRef = ref(db, 'starred-film');
-onValue(starCountRef, snapshot => {
-  const data = snapshot.val();
-  //  console.log(data);
-  //   viewUpdate(Object.values(data));  //todo function used to do something with sended data ---optional
-  // updateStarCount(postElement, data);
-});
+// const starCountRef = ref(db, 'starred-film');
+// onValue(starCountRef, snapshot => {
+//   const data = snapshot.val();
+//  console.log(data);
+//   viewUpdate(Object.values(data));  //todo function used to do something with sended data ---optional
+// updateStarCount(postElement, data);
+// });
 
 export { authWithPopup, onClickSignOut, pushData, getFromFirebase };
