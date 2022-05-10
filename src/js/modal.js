@@ -1,6 +1,8 @@
 import * as basicLightbox from 'basiclightbox'
 import { getFilmDescription } from './service/api'
 import { makeModalMarkup } from './markup'
+import { getFromFirebase } from './service/firebase-api'
+import { pushData } from './service/firebase-api'
 export function makeFilmModal(id) {
     getFilmDescription(id)
         .then(r => {
@@ -22,12 +24,12 @@ function createBox(markup) {
     })
     instance.show()
 }
-function makeButtonAction(id) {
+async function makeButtonAction(id) {
     const trailer = document.querySelector(".modal__button--trailer")
     const watched = document.querySelector(".modal__button--watched")
     const q = document.querySelector(".modal__button--q")
-    let watchList = JSON.parse(localStorage.getItem("watched"))
-
+    let watchList = await getFromFirebase("watched")
+    console.log(watchList)
     if (!watchList) {
         watchList = []
     }
@@ -35,27 +37,29 @@ function makeButtonAction(id) {
     if (watchList.includes(id)) {
         watched.classList.add("butttonActiveState");
         watched.textContent = "REMOVE FROM WATCHED"
+    } else {
+        watched.textContent = "ADD TO WATCHED"
     }
 
     watched.addEventListener("click", () => {
         watched.classList.toggle("butttonActiveState")
         if (!watchList.includes(id)) {
             watchList.push(id)
-            localStorage.setItem(`watched`, JSON.stringify(watchList))
+            pushData(id, "watched")
             watched.textContent = "REMOVE FROM WATCHED"
         } else {
             watchList.splice(watchList.indexOf(id), 1)
-            localStorage.setItem("watched", JSON.stringify(watchList))
+            // delete data pushData(watchList, "watched")
             watched.textContent = "ADD TO WATCHED"
         }
     })
 
-    let queueList = JSON.parse(localStorage.getItem("queued"))
+    let queueList = await getFromFirebase("queued")
 
     if (!queueList) {
         queueList = []
     }
-
+    console.log(queueList)
     if (queueList.includes(id)) {
         q.classList.add("butttonActiveState");
         q.textContent = "REMOVE FROM QUEUE"
@@ -65,11 +69,11 @@ function makeButtonAction(id) {
         q.classList.toggle("butttonActiveState")
         if (!queueList.includes(id)) {
             queueList.push(id)
-            localStorage.setItem(`queued`, JSON.stringify(queueList))
-            q.textContent = "REMOVE FROM QUEUE"
+            pushData(id, "queued")
+            q.textContent = "REMOVE FROM  QUEUE"
         } else {
             queueList.splice(queueList.indexOf(id), 1)
-            localStorage.setItem("queued", JSON.stringify(queueList))
+            // delete q
             q.textContent = "ADD TO QUEUE"
         }
     })
@@ -89,3 +93,4 @@ function makeButtonAction(id) {
             })
     })
 }
+makeFilmModal(453395)

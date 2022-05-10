@@ -25,11 +25,11 @@ export function makeModalMarkup(r) {
         <div class="modal__button modal__button--trailer" >WATCH TRAILER</div>      
         <div class="modal__buttons">
         
-        <div class="modal__button modal__button--watched" >ADD TO WATCHED</div>
-        <div class="modal__button modal__button--q">ADD TO QUEUE</button></div> 
-        </div> 
-        </div> 
-        </div>
-        </div>`
+        <div class="modal__button modal__button--watched" ></div>
+        <div class="modal__button modal__button--q" ></button ></div > 
+        </div > 
+        </div > 
+        </div >
+        </div > `
     return markup
 }
