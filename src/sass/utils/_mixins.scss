@@ -1,19 +1,19 @@
 @mixin mobile {
-    @media screen and (min-width: 480px) {
-        @content;
-    }
+  @media screen and (min-width: 480px) {
+    @content;
+  }
 }
 
 @mixin less-tab {
-    @media screen and (max-width: 767px) {
-        @content;
-    }
+  @media screen and (max-width: 767px) {
+    @content;
+  }
 }
 
 @mixin tab {
-    @media screen and (min-width: 768px) {
-        @content;
-    }
+  @media screen and (min-width: 768px) {
+    @content;
+  }
 }
 
 @mixin desk {
@@ -23,7 +23,7 @@
 }
 
 @mixin less-desk {
-    @media screen and (max-width: 1279px) {
-        @content;
-    }
+  @media screen and (max-width: 1279px) {
+    @content;
+  }
 }
