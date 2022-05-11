@@ -8,6 +8,7 @@ import {
     pagination,
     pagination_last,
     pagination_first,
+    lastPoint
 } from './ref';
 
 const loadPopular = async (page) => {
@@ -37,6 +38,7 @@ const bVH = document.querySelectorAll('.pagVisualHidden')
 
 
 
+
 const paginationFunc = (arr) => {
     
 
@@ -48,13 +50,16 @@ const paginationFunc = (arr) => {
     formPagination.innerHTML = ''
     const bVH = document.querySelectorAll('.pagVisualHidden')
     
-    for (let i = limit; i <= arr.total_pages; i += 1) {
+    for (let i = limit; i <= arr.total_pages - 1; i += 1) {
         if (arr.total_pages > 5) {
             for (const i of bVH) {
                 i.classList.remove('visually-hidden')
             
             }
         }
+        pagination_last.classList.remove('visually-hidden')
+        pagination_last.textContent = arr.total_pages;
+
         const markup = `
                 <li class='pagination_item'>
                 <button name='button' class='pagination_button' type='button'>${i}</button>
@@ -62,7 +67,7 @@ const paginationFunc = (arr) => {
             
         `
         formPagination.insertAdjacentHTML('afterbegin', markup);
-        console.log(arr.total_pages);
+        
         const a = document.querySelectorAll('.pagination_item')
         const f = document.querySelectorAll('.pagination_button')
         
@@ -80,6 +85,13 @@ const paginationFunc = (arr) => {
         } else {
             pagination_first.classList.remove('visually-hidden')
             pagination_first.textContent = 1;
+        }
+        if (limit + 4 >= arr.total_pages) {
+            next.disabled = true
+            lastPoint.classList.add('visually-hidden')
+        } else {
+            next.disabled = false
+            lastPoint.classList.remove('visually-hidden')
         }
         if (limit < 5) {
             
@@ -102,7 +114,6 @@ const paginationFuncSecondPopular = (e) => {
     const page = e.target.textContent;
     if (e.target.classList.contains('next')) {
       limit = limit + 4;
-      console.log(page)
         formPagination.innerHTML = ''
         getPopularFilm().then(res => {
           paginationFunc(res)
@@ -131,6 +142,13 @@ const paginationFuncSecondPopular = (e) => {
             i.classList.remove('current')
         } else {
             e.target.classList.add('current')
+        }
+    }
+    if (e.target === pagination_last) {
+        if (!pagination_last.classList.contains('current')) {
+            pagination_last.classList.add('current') 
+        } else {
+            pagination_last.classList.remove('current')
         }
     }
 

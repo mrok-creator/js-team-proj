@@ -12,6 +12,7 @@ import {
     pagination,
     pagination_last,
     pagination_first,
+    lastPoint
 } from './ref';
 import { markupFunction } from './markup.js';
 
@@ -73,18 +74,15 @@ const paginationFunc = (arr) => {
     for (const i of bVH) {
         i.classList.add('visually-hidden')
     }
+    pagination_last.classList.remove('visually-hidden')
+    pagination_last.textContent = arr.total_pages;
     if (arr.total_pages > 5) {
         for (const i of bVH) {
         i.classList.remove('visually-hidden')
     }
     }
-    if (limit >= arr.total_pages) {
-        next.disabled = true
-    } else {
-        next.disabled = false
-    }
     formPagination.innerHTML = ''
-    for (let i = limit; i <= arr.total_pages; i += 1) {
+    for (let i = limit; i <= arr.total_pages - 1; i += 1) {
 
         const markup = `
                 <li class='pagination_item'>
@@ -103,13 +101,20 @@ const paginationFunc = (arr) => {
     }
         if (a.length >= 4) {
             pagination_first.textContent = 1;
-            pagination_last.textContent = arr.total_pages;
             return
         } else {
             pagination_first.classList.remove('visually-hidden')
             pagination_first.textContent = 1;
         }
+
         
+        if (limit + 4 >= arr.total_pages) {
+            next.disabled = true
+            lastPoint.classList.add('visually-hidden')
+        } else {
+            next.disabled = false
+            lastPoint.classList.remove('visually-hidden')
+        }
         if (limit < 5) {
             
             first.classList.add('visually-hidden')
@@ -162,12 +167,21 @@ const paginationFuncSecond = (e) => {
     for (const i of f) {
     
         if (i.classList.contains('current')) {
+            
             i.classList.remove('current')
         } else {
             e.target.classList.add('current')
         }
     }
-
+    if (e.target === pagination_last) {
+        if (!pagination_last.classList.contains('current')) {
+            pagination_last.classList.add('current')
+            
+        } else {
+            pagination_last.classList.remove('current')
+        }
+    }
+    
 
 
 
