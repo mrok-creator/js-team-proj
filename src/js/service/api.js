@@ -27,7 +27,6 @@ async function getGenresDescr() {
 }
 getGenresDescr();
 
-
 //запускает и показывает обьект с первой страницей в которой обьект на 20 фильмов
 async function getPopularFilm(page = 1) {
   try {
@@ -42,7 +41,6 @@ async function getPopularFilm(page = 1) {
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
-    console.log(data)
     return data;
   } catch (error) {
     console.error(error);
@@ -68,7 +66,6 @@ async function searchFilmByName(query, page = 1) {
       item.poster_path = getFullImageLink(item.poster_path);
     });
     return data;
-    
   } catch (error) {
     console.log(error);
   }
@@ -94,7 +91,6 @@ function getGenresNames(genresIds) {
     return name;
   });
   return genresNames;
-  
 }
 
 function getFullImageLink(poster_path) {
