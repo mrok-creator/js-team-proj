@@ -28,7 +28,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "basiclightbox": "^5.0.4",
-    "firebase": "^9.8.0",
+    "firebase": "^9.8.1",
     "notiflix": "^3.2.5"
   }
 }

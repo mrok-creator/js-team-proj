@@ -1,0 +1,58 @@
+<div class="backdrop is-hidden" data-modal>
+    <div class="modal-team">
+        <button class="modal__close" data-modal-close>
+      <svg class="close-icon" width="11" height="11">
+        <use href="./images/sprite.svg#icon-cross"></use>
+      </svg>
+    </button>
+        <h2 class="team__title title">Developers team</h2>
+        <ul class="team__list list cards">
+            <li class="cards__item">
+                <img src="./images/teammate-1.jpg" alt="Oleksandr Kasiyanenko" width="270" height="260" />
+                <h3 class="cards__title title">Oleksandr Kasiyanenko</h3>
+                <p class="cards__text">Teamleader</p>
+            </li>
+            <li class="cards__item">
+                <img src="./images/teammate-2.jpg" alt="Игорь Демьяненко" width="270" height="260" />
+                <h3 class="cards__title title">Dmytro Kulakov</h3>
+                <p class="cards__text">Front-end Developer</p>
+            </li>
+            <li class="cards__item">
+                <img src="./images/teammate-3.jpg" alt="Игорь Демьяненко" width="270" height="260" />
+                <h3 class="cards__title title">Myroslav Vecheruk</h3>
+                <p class="cards__text">Scrum master</p>
+            </li>
+            <li class="cards__item">
+                <img src="./images/teammate-4.jpg" alt="Игорь Демьяненко" width="270" height="260" />
+                <h3 class="cards__title title">Vladyslav Korsun</h3>
+                <p class="cards__text">Front-end Developer</p>
+            </li>
+            <li class="cards__item">
+                <img src="./images/teammate-5.jpg" alt="Игорь Демьяненко" width="270" height="260" />
+                <h3 class="cards__title title">Matvii Skrypka</h3>
+                <p class="cards__text">Front-end Developer</p>
+            </li>
+            <li class="cards__item">
+                <img src="./images/teammate-6.jpg" alt="Игорь Демьяненко" width="270" height="260" />
+                <h3 class="cards__title title">Maxim Grytsenya</h3>
+                <p class="cards__text">Front-end Developer</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    (() => {
+        const refs = {
+            openModalBtn: document.querySelector('[data-modal-open]'),
+            closeModalBtn: document.querySelector('[data-modal-close]'),
+            modal: document.querySelector('[data-modal]'),
+        };
+
+        refs.openModalBtn.addEventListener('click', toggleModal);
+        refs.closeModalBtn.addEventListener('click', toggleModal);
+
+        function toggleModal() {
+            refs.modal.classList.toggle('is-hidden');
+        }
+    })();
+</script>
