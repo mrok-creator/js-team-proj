@@ -44,6 +44,7 @@ async function makeButtonAction(id) {
     q.style.display = 'flex';
     watched.style.display = 'flex';
   }
+
   let watchList = await getFromFirebase('watched');
   if (!watchList || !watchList.includes(id)) {
     watched.textContent = 'ADD TO WATCHED';
@@ -51,12 +52,21 @@ async function makeButtonAction(id) {
     watched.classList.add('butttonActiveState');
     watched.textContent = 'REMOVE FROM WATCHED';
   }
+
   watched.addEventListener('click', () => {
     watched.classList.toggle('butttonActiveState');
+
     if (!watchList || !watchList.includes(id)) {
+
+      if (!watchList) {
+        watchList = []
+      }
+      watchList.push(id)
+
       pushData(id, 'watched');
       watched.textContent = 'REMOVE FROM WATCHED';
     } else {
+
       watchList.splice(watchList.indexOf(id), 1);
       removeFromFirebase('watched');
       watchList.forEach(e => {
@@ -77,11 +87,17 @@ async function makeButtonAction(id) {
     q.textContent = 'REMOVE FROM QUEUE';
   }
 
+
   q.addEventListener('click', () => {
     q.classList.toggle('butttonActiveState');
     if (!queueList || !queueList.includes(id)) {
+      if (!queueList) {
+        queueList = []
+      }
+      queueList.push(id)
       pushData(id, 'queued');
       q.textContent = 'REMOVE FROM  QUEUE';
+
     } else {
       queueList.splice(queueList.indexOf(id), 1);
       removeFromFirebase('queued');
@@ -90,6 +106,7 @@ async function makeButtonAction(id) {
       });
       q.textContent = 'ADD TO QUEUE';
     }
+
     if (Number(localStorage.getItem('libraryOpenFlag'))) {
       onClickQueue();
     }
