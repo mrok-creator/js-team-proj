@@ -17,7 +17,7 @@ import { myLibrary } from './js/my-library';
 
 import { onScroll, onUpBtnClick } from './js/scroll';
 
-import Darkmode from 'darkmode-js';
+import Darkmode from '../node_modules/darkmode-js/lib/darkmode-js';
 
 // new Darkmode().showWidget();
 
