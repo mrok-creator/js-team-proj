@@ -35,7 +35,7 @@ function makeModalMarkup(r) {
   const markup = `
         <div class="modal">          
         <svg  class="modal__icon">
-            <use href="/sprite.657cd878.svg#icon-close"></use>
+            <use href="/js-team-proj/sprite.657cd878.svg#icon-close"></use>
         </svg>      
         <div class="modal__wrapper">
         <img class="modal__img" src="https://image.tmdb.org/t/p/w500${r.poster_path}" alt="" />
