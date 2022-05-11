@@ -5,6 +5,7 @@ import { getFromFirebase, removeFromFirebase } from './service/firebase-api';
 import { pushData } from './service/firebase-api';
 import { getDatabase, ref, push, onValue, get, key } from 'firebase/database';
 import { onClickWatched, onClickQueue } from './my-library';
+import { async } from '@firebase/util';
 
 const ul = document.querySelector('.list_films');
 ul.addEventListener('click', e => {
@@ -15,10 +16,11 @@ ul.addEventListener('click', e => {
     makeFilmModal(b.id);
   }
 });
-export function makeFilmModal(id) {
+function makeFilmModal(id) {
   getFilmDescription(id).then(r => {
     createBox(makeModalMarkup(r));
     makeButtonAction(id);
+    makeTrailerAction(id)
   });
 }
 
@@ -36,10 +38,11 @@ function createBox(markup) {
   instance.show();
 }
 async function makeButtonAction(id) {
-  const trailer = document.querySelector('.modal__button--trailer');
+
   const watched = document.querySelector('.modal__button--watched');
   const q = document.querySelector('.modal__button--q');
   const userId = localStorage.getItem('userId');
+
   if (userId) {
     q.style.display = 'flex';
     watched.style.display = 'flex';
@@ -112,20 +115,17 @@ async function makeButtonAction(id) {
     }
   });
 
-  trailer.addEventListener('click', () => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}}/videos?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US`,
-    )
-      .then(r => r.json())
-      .then(r => {
-        if (r.results.length === 0) {
-          const instance2 = basicLightbox.create(`<div class="sorry-text">а де?</div>`);
-          instance2.show();
-        } else {
-          const instance2 = basicLightbox.create(`
+}
+async function makeTrailerAction(id) {
+  const trailer = document.querySelector('.modal__button--trailer');
+  const r = await (await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US`)).json()
+  if (r.results.length > 0) {
+    trailer.style.display = "flex"
+    trailer.addEventListener('click', () => {
+      const instance2 = basicLightbox.create(`
                 <iframe allow="fullscreen;" src="https://www.youtube.com/embed/${r.results[0].key}" width="560" height="315"  frameborder="0"></iframe>`);
-          instance2.show();
-        }
-      });
-  });
+      instance2.show();
+    })
+  }
+
 }
