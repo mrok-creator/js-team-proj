@@ -7,7 +7,6 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     @include mobile{
     padding-top: 20px;
     }
@@ -48,7 +47,7 @@
     &__img{
     width: 309px;
     height: 449px;
-
+     transition: transform 0.35s, box-shadow 0.35s;
     border-radius: 5px;
     }
     &__wrapper{
@@ -60,7 +59,7 @@
         font-weight: 700;
         font-size: 12px;
         line-height: 16px;
-
+        text-transform: uppercase;
         color: #000000;
     }
     &__wrapper--data{
@@ -96,6 +95,15 @@
 
     color: #ffff;
     background-color: #FF6B01;
+    }
+    &__img:hover{
+        box-shadow: 7px -7px 21px rgba(21, 10, 2, 0.841);
+        opacity: .9;
+        transform: scale(1.1);
+    
+    }
+    &__link:focus{
+        outline: none;
     }
 }
 .pagination{
@@ -167,4 +175,7 @@ border-radius: 5px;
 }
 .icon{
     fill: #000000;
+}
+.movies__wrapper{
+    cursor: default;
 }

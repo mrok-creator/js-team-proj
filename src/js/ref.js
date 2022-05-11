@@ -7,6 +7,7 @@ const back = document.querySelector('.back');
 const pagination = document.querySelector('.pagination');
 const pagination_first = document.querySelector('.pagination_first');
 const pagination_last = document.querySelector('.pagination_last');
+const first = document.querySelector('.firstPoint')
 
 export {
   input,
@@ -18,6 +19,7 @@ export {
   pagination,
   pagination_first,
   pagination_last,
+  first
 };
 
 export const loginBtn = document.querySelector('.js-log-in-btn');
