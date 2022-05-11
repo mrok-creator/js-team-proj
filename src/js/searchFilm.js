@@ -12,6 +12,7 @@ import {
     pagination,
     pagination_last,
     pagination_first,
+    lastPoint
 } from './ref';
 import { markupFunction } from './markup.js';
 
@@ -65,16 +66,23 @@ const searchFilmMarkup = async (em) => {
 
 let limit = 2;
 
-
+let numberCurrent = null;
 const paginationFunc = (arr) => {
-
-    if (limit >= arr.total_pages) {
-        next.disabled = true
-    } else {
-        next.disabled = false
+    
+    
+    const bVH = document.querySelectorAll('.pagVisualHidden')
+    for (const i of bVH) {
+        i.classList.add('visually-hidden')
+    }
+    pagination_last.classList.remove('visually-hidden')
+    pagination_last.textContent = arr.total_pages;
+    if (arr.total_pages > 5) {
+        for (const i of bVH) {
+        i.classList.remove('visually-hidden')
+    }
     }
     formPagination.innerHTML = ''
-    for (let i = limit; i <= arr.total_pages; i += 1) {
+    for (let i = limit; i <= arr.total_pages - 1; i += 1) {
 
         const markup = `
                 <li class='pagination_item'>
@@ -84,21 +92,29 @@ const paginationFunc = (arr) => {
         `
         formPagination.insertAdjacentHTML('afterbegin', markup);
         const a = document.querySelectorAll('.pagination_item')
-        if (a.length >= 4) {
-            const visuallyHiddenRm =  pagination.querySelectorAll('.visually-hidden')
-
-            for (const i of visuallyHiddenRm) {
-                i.classList.remove('visually-hidden')
+        const f = document.querySelectorAll('.pagination_button')
+        numberCurrent = '1';
+        for (const i of f) {
+            if (i.textContent === numberCurrent) {
+                i.classList.add('current')
             }
-
+    }
+        if (a.length >= 4) {
             pagination_first.textContent = 1;
-            pagination_last.textContent = arr.total_pages;
             return
         } else {
             pagination_first.classList.remove('visually-hidden')
             pagination_first.textContent = 1;
         }
+
         
+        if (limit + 4 >= arr.total_pages) {
+            next.disabled = true
+            lastPoint.classList.add('visually-hidden')
+        } else {
+            next.disabled = false
+            lastPoint.classList.remove('visually-hidden')
+        }
         if (limit < 5) {
             
             first.classList.add('visually-hidden')
@@ -108,8 +124,9 @@ const paginationFunc = (arr) => {
             back.disabled = false
 
         }
-
     }
+    
+    
 
 }
 
@@ -143,16 +160,28 @@ const paginationFuncSecond = (e) => {
             }
         )
     }
+    numberCurrent = e.target.innerText
+    
     const f = document.querySelectorAll('.pagination_button')
+    
     for (const i of f) {
-
+    
         if (i.classList.contains('current')) {
+            
             i.classList.remove('current')
         } else {
             e.target.classList.add('current')
         }
     }
-
+    if (e.target === pagination_last) {
+        if (!pagination_last.classList.contains('current')) {
+            pagination_last.classList.add('current')
+            
+        } else {
+            pagination_last.classList.remove('current')
+        }
+    }
+    
 
 
 
@@ -163,7 +192,7 @@ const paginationFuncSecond = (e) => {
 const debounceOnInputSearch = debounce(onInputSearch, 500);
 const listenerForInput = form.addEventListener('submit', onInputSearch);
 
-export { debounceOnInputSearch, listenerForInput };
+
 
 const button = document.querySelector('.button__D')
-export {paginationFuncSecond}
+export {paginationFuncSecond, debounceOnInputSearch, listenerForInput,paginationFunc }
