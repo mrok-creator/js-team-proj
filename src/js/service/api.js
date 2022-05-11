@@ -1,12 +1,18 @@
 import axios from 'axios';
 import notFoundImg from '../../images/poster-img.jpg';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const instance = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
   params: {
     api_key: '453647fe51ddb15dbe812a48a21b448b',
   },
 });
-
+Loading.standard({
+  svgColor: '#FF6B01',
+});
+window.addEventListener('load', () => {
+  Loading.remove();
+});
 let genres = null;
 
 // https://api.themoviedb.org/wRnbWt44nKjsFPrqSmwYki5vZtF.jpg
@@ -35,6 +41,7 @@ async function getPopularFilm(page = 1) {
         page,
       },
     });
+
     data.results.forEach(item => {
       item.genres = getGenresNames(item.genre_ids);
     });
@@ -49,6 +56,9 @@ async function getPopularFilm(page = 1) {
 
 async function searchFilmByName(query, page = 1) {
   try {
+    Loading.standard({
+      svgColor: '#FF6B01',
+    });
     const { data } = await instance.get(`search/movie`, {
       params: {
         page,
@@ -65,6 +75,7 @@ async function searchFilmByName(query, page = 1) {
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
+    Loading.remove();
     return data;
   } catch (error) {
     console.log(error);
@@ -73,12 +84,15 @@ async function searchFilmByName(query, page = 1) {
 
 async function getFilmDescription(filmId) {
   try {
+    Loading.standard({
+      svgColor: '#FF6B01',
+    });
     const { data } = await instance.get(`movie/${filmId}`, {
       params: {
         language: 'en - US',
       },
     });
-
+    Loading.remove();
     return data;
   } catch (error) {
     console.log(error.text);
