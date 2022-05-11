@@ -2,7 +2,7 @@ import { movieListRef } from './ref';
 
 const markupFunction = arr => {
   const markup = arr
-    .map(({ title, name, id, genres, poster_path : poster, release_date, vote_average, first_air_date }) => {
+    .map(({ title, name, id, genres, poster_path: poster, release_date, vote_average, first_air_date }) => {
       const filmTitle = title || name;
       const genresCard = genres?.join(', ');
       const year = new Date(release_date || first_air_date).getFullYear() || '';
@@ -35,7 +35,7 @@ function makeModalMarkup(r) {
   const markup = `
         <div class="modal">          
         <svg  class="modal__icon">
-            <use href="/sprite.5ec50489.svg#icon-close"></use>
+            <use href="/sprite.657cd878.svg#icon-close"></use>
         </svg>      
         <div class="modal__wrapper">
         <img class="modal__img" src="https://image.tmdb.org/t/p/w500${r.poster_path}" alt="" />
