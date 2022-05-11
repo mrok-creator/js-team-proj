@@ -117,7 +117,8 @@ const paginationFuncSecondPopular = (e) => {
 
 pagination.addEventListener('click', paginationFuncSecondPopular)
 
-export {paginationFuncSecondPopular}
+export { paginationFuncSecondPopular }
+export { paginationFunc}
 
 
 

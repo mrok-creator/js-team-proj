@@ -4,6 +4,8 @@ import { makeModalMarkup } from './markup'
 import { getFromFirebase, removeFromFirebase } from './service/firebase-api'
 import { pushData } from './service/firebase-api'
 import { getDatabase, ref, push, onValue, get, key } from 'firebase/database';
+import { onClickWatched, onClickQueue } from './my-library'
+
 const ul = document.querySelector(".list_films")
 ul.addEventListener("click", (e) => {
     e.preventDefault()
@@ -24,7 +26,7 @@ export function makeFilmModal(id) {
 }
 
 function createBox(markup) {
-    const instance = basicLightbox.create(markup, {
+     const instance = basicLightbox.create(markup, {
         onShow: (instance) => {
             window.addEventListener("keydown", (e) => {
                 if (e.keyCode == 27) {
@@ -58,6 +60,9 @@ async function makeButtonAction(id) {
         if (!watchList || !watchList.includes(id)) {
             pushData(id, "watched")
             watched.textContent = "REMOVE FROM WATCHED"
+            if (Number(localStorage.getItem('libraryOpenFlag'))) {
+                onClickWatched();
+            }
         } else {
             watchList.splice(watchList.indexOf(id), 1)
             removeFromFirebase("watched")
@@ -65,6 +70,10 @@ async function makeButtonAction(id) {
                 pushData(e, "watched")
             });
             watched.textContent = "ADD TO WATCHED"
+            if (Number(localStorage.getItem('libraryOpenFlag'))) {
+                onClickWatched();
+            }
+            
         }
     })
 
@@ -82,6 +91,9 @@ async function makeButtonAction(id) {
         if (!queueList || !queueList.includes(id)) {
             pushData(id, "queued")
             q.textContent = "REMOVE FROM  QUEUE"
+            if (Number(localStorage.getItem('libraryOpenFlag'))) {
+                onClickQueue();
+            }
         } else {
             queueList.splice(queueList.indexOf(id), 1)
             removeFromFirebase("queued")
@@ -89,6 +101,9 @@ async function makeButtonAction(id) {
                 pushData(e, "queued")
             });
             q.textContent = "ADD TO QUEUE"
+             if (Number(localStorage.getItem('libraryOpenFlag'))) {
+                onClickQueue();
+            }
         }
     })
 
@@ -108,3 +123,6 @@ async function makeButtonAction(id) {
     })
 
 }
+
+
+
