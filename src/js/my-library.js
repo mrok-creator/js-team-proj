@@ -21,6 +21,7 @@ const refs = {
   gallery: document.querySelector('.list_films'),
   header: document.querySelector('.header'),
   pagination: document.querySelector('.pagination'),
+  galleryInfo: document.querySelector('.gallery-info')
 };
 let flag = 0;
 
@@ -52,6 +53,7 @@ function onClickMyHomeBtn() {
   flag = 0;
   localStorage.setItem('libraryOpenFlag', flag);
   refs.pagination.classList.remove('visually-hidden');
+  refs.galleryInfo.innerHTML = '';
 }
 
 function myLibrary() {
@@ -75,42 +77,57 @@ function changeClass(add, remove) {
 
 function onClickWatched() {
   changeClass('on', 'off');
+  refs.galleryInfo.innerHTML = '';
   movieListRef.innerHTML = '';
+  
   getFromFirebase('watched')
     .then(res => {
+
+      if (!res) {
+       refs.galleryInfo.innerHTML = 'Please add something to library';
+      } else {
+        
+      
       const filtered = res.filter((item, index, array) => {
         return index === array.indexOf(item);
+       
       });
-      // console.log(filtered)
-      // return res.forEach(async (item) => {
-      //     await getFilmDescription(item)
-      //         .then(render)
-      // })
+
       for (let i = 0; i < filtered.length; i += 1) {
         getFilmDescription(filtered[i]).then(render);
       }
+      }
     })
-    .catch(console.log);
+    .catch();
+  
 }
 
 function onClickQueue() {
   changeClass('off', 'on');
+  refs.galleryInfo.innerHTML = '';
   movieListRef.innerHTML = '';
   getFromFirebase('queued')
     .then(res => {
-      const filtered = res.filter((item, index, array) => {
-        return index === array.indexOf(item);
-      });
-      // console.log(filtered)
-      // return res.forEach(async (item) => {
-      //     await getFilmDescription(item)
-      //         .then(render)
-      // })
-      for (let i = 0; i < filtered.length; i += 1) {
-        getFilmDescription(filtered[i]).then(render);
+      if (!res) {
+        refs.galleryInfo.innerHTML = 'Please add something to library';
+      } else {
+        
+     
+        const filtered = res.filter((item, index, array) => {
+          return index === array.indexOf(item);
+        });
+        // console.log(filtered)
+        // return res.forEach(async (item) => {
+        //     await getFilmDescription(item)
+        //         .then(render)
+        // })
+        for (let i = 0; i < filtered.length; i += 1) {
+          getFilmDescription(filtered[i]).then(render);
+        }
       }
+
     })
-    .catch(console.log);
+    .catch();
 }
 
 // =====
