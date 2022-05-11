@@ -1,6 +1,7 @@
 import { getPopularFilm } from './service/api';
 import { markupFunction } from './markup';
 import {
+    first,
     formPagination,
     next,
     back,
@@ -31,8 +32,13 @@ export { loadPopular };
 
 let limit = 2;
 
+let numberCurrent = '1';
+const bVH = document.querySelectorAll('.pagVisualHidden')
+
+
 
 const paginationFunc = (arr) => {
+    
 
     if (limit >= arr.total_pages) {
         next.disabled = true
@@ -40,8 +46,15 @@ const paginationFunc = (arr) => {
         next.disabled = false
     }
     formPagination.innerHTML = ''
+    const bVH = document.querySelectorAll('.pagVisualHidden')
+    
     for (let i = limit; i <= arr.total_pages; i += 1) {
-
+        if (arr.total_pages > 5) {
+            for (const i of bVH) {
+                i.classList.remove('visually-hidden')
+            
+            }
+        }
         const markup = `
                 <li class='pagination_item'>
                 <button name='button' class='pagination_button' type='button'>${i}</button>
@@ -49,12 +62,17 @@ const paginationFunc = (arr) => {
             
         `
         formPagination.insertAdjacentHTML('afterbegin', markup);
+        console.log(arr.total_pages);
         const a = document.querySelectorAll('.pagination_item')
-        if (a.length >= 4) {
-            const visuallyHiddenRm =  pagination.querySelectorAll('.visually-hidden')
-            for (const i of visuallyHiddenRm) {
-                i.classList.remove('visually-hidden')
+        const f = document.querySelectorAll('.pagination_button')
+        
+        for (const i of f) {
+            if (i.textContent === numberCurrent) {
+                i.classList.add('current')
             }
+    }
+        if (a.length >= 4) {
+            
 
             pagination_first.textContent = 1;
             pagination_last.textContent = arr.total_pages;
@@ -64,13 +82,15 @@ const paginationFunc = (arr) => {
             pagination_first.textContent = 1;
         }
         if (limit < 5) {
-
+            
+            first.classList.add('visually-hidden')
             back.disabled = true
         } else {
+            first.classList.remove('visually-hidden')
             back.disabled = false
 
         }
-
+    
     }
 
 }
@@ -103,6 +123,7 @@ const paginationFuncSecondPopular = (e) => {
           markupFunction(res.results)
         })
     }
+    numberCurrent = e.target.innerText
     const f = document.querySelectorAll('.pagination_button')
     for (const i of f) {
 

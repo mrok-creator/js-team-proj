@@ -65,9 +65,19 @@ const searchFilmMarkup = async (em) => {
 
 let limit = 2;
 
-
+let numberCurrent = null;
 const paginationFunc = (arr) => {
-
+    
+    
+    const bVH = document.querySelectorAll('.pagVisualHidden')
+    for (const i of bVH) {
+        i.classList.add('visually-hidden')
+    }
+    if (arr.total_pages > 5) {
+        for (const i of bVH) {
+        i.classList.remove('visually-hidden')
+    }
+    }
     if (limit >= arr.total_pages) {
         next.disabled = true
     } else {
@@ -84,13 +94,14 @@ const paginationFunc = (arr) => {
         `
         formPagination.insertAdjacentHTML('afterbegin', markup);
         const a = document.querySelectorAll('.pagination_item')
-        if (a.length >= 4) {
-            const visuallyHiddenRm =  pagination.querySelectorAll('.visually-hidden')
-
-            for (const i of visuallyHiddenRm) {
-                i.classList.remove('visually-hidden')
+        const f = document.querySelectorAll('.pagination_button')
+        numberCurrent = '1';
+        for (const i of f) {
+            if (i.textContent === numberCurrent) {
+                i.classList.add('current')
             }
-
+    }
+        if (a.length >= 4) {
             pagination_first.textContent = 1;
             pagination_last.textContent = arr.total_pages;
             return
@@ -108,8 +119,9 @@ const paginationFunc = (arr) => {
             back.disabled = false
 
         }
-
     }
+    
+    
 
 }
 
@@ -143,9 +155,12 @@ const paginationFuncSecond = (e) => {
             }
         )
     }
+    numberCurrent = e.target.innerText
+    
     const f = document.querySelectorAll('.pagination_button')
+    
     for (const i of f) {
-
+    
         if (i.classList.contains('current')) {
             i.classList.remove('current')
         } else {
@@ -163,7 +178,7 @@ const paginationFuncSecond = (e) => {
 const debounceOnInputSearch = debounce(onInputSearch, 500);
 const listenerForInput = form.addEventListener('submit', onInputSearch);
 
-export { debounceOnInputSearch, listenerForInput };
+
 
 const button = document.querySelector('.button__D')
-export {paginationFuncSecond}
+export {paginationFuncSecond, debounceOnInputSearch, listenerForInput,paginationFunc }
