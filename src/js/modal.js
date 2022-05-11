@@ -102,7 +102,6 @@ async function makeButtonAction(id) {
 async function makeTrailerAction(id) {
   const trailer = document.querySelector('.modal__button--trailer');
   const r = await (await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=453647fe51ddb15dbe812a48a21b448b&language=en-US`)).json()
-  console.log(r)
   if (r.results.length > 0) {
     trailer.style.display = "flex"
     trailer.addEventListener('click', () => {
