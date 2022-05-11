@@ -1,0 +1,102 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    overflow: auto;
+}
+
+.backdrop.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-team {
+    overflow-y: scroll;
+    min-width: 320px;
+    height: 85vh;
+    padding: 25px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    @include tab {
+        width: 650px;
+        padding: 40px;
+    }
+    @include desk {
+        width: 950px;
+        padding: 40px;
+    }
+}
+
+.modal__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 0;
+    border: none;
+    // border: 1px solid rgba(0, 0, 0, 0.1);
+    // border-radius: 50%;
+    background-color: transparent;
+    transition: fill $cubic-bezier;
+    &:hover,
+    &:focus {
+        fill: $accent-color;
+    }
+}
+
+.team__title {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.15;
+    text-align: center;
+    letter-spacing: 0.03em;
+    margin-bottom: 12px;
+    color: black;
+}
+
+.cards__text {
+    color: $accent-color;
+}
+
+// .modal__text {
+//     outline: none;
+//     width: 100%;
+//     height: 120px;
+//     border: 1px solid rgba(33, 33, 33, 0.2);
+//     border-radius: 4px;
+//     background-color: transparent;
+//     padding: 12px 16px;
+//     resize: none;
+//     transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+// }
+.cards__item {
+    display: block;
+    margin-bottom: 10px;
+    background-color: $footer-bg;
+    border-radius: 5px;
+    @include tab {
+        margin-right: 30px;
+    }
+}
+
+.team__list {
+    @include tab {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -30px;
+    }
+}
