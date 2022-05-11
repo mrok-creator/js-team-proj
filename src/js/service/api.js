@@ -10,9 +10,9 @@ const instance = axios.create({
 Loading.standard({
   svgColor: '#FF6B01',
 });
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
   Loading.remove();
-})
+});
 let genres = null;
 
 // https://api.themoviedb.org/wRnbWt44nKjsFPrqSmwYki5vZtF.jpg
@@ -36,9 +36,6 @@ getGenresDescr();
 //запускает и показывает обьект с первой страницей в которой обьект на 20 фильмов
 async function getPopularFilm(page = 1) {
   try {
-    Loading.standard({
-      svgColor: '#FF6B01',
-    });
     const { data } = await instance.get(`trending/movie/day`, {
       params: {
         page,
@@ -51,9 +48,7 @@ async function getPopularFilm(page = 1) {
     data.results.forEach(item => {
       item.poster_path = getFullImageLink(item.poster_path);
     });
-    Loading.remove();
     return data;
-
   } catch (error) {
     console.error(error);
   }
@@ -82,7 +77,6 @@ async function searchFilmByName(query, page = 1) {
     });
     Loading.remove();
     return data;
-
   } catch (error) {
     console.log(error);
   }
