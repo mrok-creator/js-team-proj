@@ -2,12 +2,22 @@ import { movieListRef } from './ref';
 
 const markupFunction = arr => {
   const markup = arr
-    .map(({ title, name, id, genres, poster_path: poster, release_date, vote_average, first_air_date }) => {
-      const filmTitle = title || name;
-      const genresCard = genres?.join(', ');
-      const year = new Date(release_date || first_air_date).getFullYear() || '';
-      const rating = vote_average || '0.0';
-      return ` <li id='${id}' class="movies">
+    .map(
+      ({
+        title,
+        name,
+        id,
+        genres,
+        poster_path: poster,
+        release_date,
+        vote_average,
+        first_air_date,
+      }) => {
+        const filmTitle = title || name;
+        const genresCard = genres?.join(', ');
+        const year = new Date(release_date || first_air_date).getFullYear() || '';
+        const rating = vote_average || '0.0';
+        return ` <li id='${id}' class="movies">
                         <a href="" class="movies__link">  
                           <img class="movies__img" src="${poster}" alt="${filmTitle}">
                                <div class="movies__wrapper">
@@ -20,7 +30,8 @@ const markupFunction = arr => {
                             </div>
                         </a>
                      </li>`;
-    })
+      },
+    )
     .join('');
 
   addMarkup(markup);
@@ -35,7 +46,7 @@ function makeModalMarkup(r) {
   const markup = `
         <div class="modal">          
         <svg  class="modal__icon">
-            <use href="/js-team-proj/sprite.657cd878.svg#icon-close"></use>
+            <use href="/js-team-proj/sprite.68a01958.svg#icon-close"></use>
         </svg>      
         <div class="modal__wrapper">
         <img class="modal__img" src="https://image.tmdb.org/t/p/w500${r.poster_path}" alt="" />
@@ -44,8 +55,9 @@ function makeModalMarkup(r) {
         <div class="modal__info">
         <ul class="modal__keys">
             <li class="modal__key">Vote / Votes</li>
-            <li class="modal__value"><span>${r.vote_average}</span> / <span>${r.vote_count
-    }</span></li>
+            <li class="modal__value"><span>${r.vote_average}</span> / <span>${
+    r.vote_count
+  }</span></li>
             <li class="modal__key">Popularity</li>
             <li class="modal__value">${r.popularity}</li>
             <li class="modal__key">Original Title</li>
@@ -65,8 +77,8 @@ function makeModalMarkup(r) {
         </div > 
         </div > 
         </div >
-        </div > `
-  return markup
+        </div > `;
+  return markup;
 }
 
 export { markupFunction, makeModalMarkup, addMarkup };

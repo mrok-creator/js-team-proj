@@ -6,7 +6,6 @@ import { movieListRef, pagination } from './ref';
 import { loadPopular } from './popularMovie';
 import { paginationFunc } from './searchFilm';
 import { instance } from './modal';
-import * as basicLightbox from 'basiclightbox';
 
 localStorage.removeItem('libraryOpenFlag');
 
