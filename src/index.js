@@ -13,6 +13,7 @@ import { debounceOnInputSearch, listenerForInput } from './js/searchFilm';
 import { libraryBtn, loginBtn, logOutBtn } from './js/ref';
 
 import { loadPopular } from './js/popularMovie';
+import { myLibrary } from './js/my-library';  
 
 import { onScroll, onUpBtnClick } from './js/scroll';
 

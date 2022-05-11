@@ -107,6 +107,7 @@ function getFromFirebase(key) {
   const userId = localStorage.getItem('userId');
   return get(ref(db, key + userId))
     .then(snapshot => {
+      
       if (snapshot.exists()) {
         return Object.values(snapshot.val());
       } else {
