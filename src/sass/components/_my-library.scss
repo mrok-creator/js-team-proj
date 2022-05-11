@@ -18,7 +18,7 @@
 .btn-header {
     cursor: pointer;
     text-transform: uppercase;
-    height: 44px;
+    height: 46px;
     border-radius: 5px;
     padding-left: 8px;
     padding-right: 8px;
@@ -27,6 +27,9 @@
     color: #000000;
     border: 1px solid #000000;
     width: 130px;
+    @include desk{
+        width: 152px;
+    }
 }
 
 .off {
@@ -43,4 +46,50 @@
 
 .btn-header:first-child{
     margin-right: 15px;
+}
+
+.myLib{
+    @include less-tab {
+        width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/lib-header-phone.png');
+    
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+               background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/lib-header-phone@2x.png');
+        }
+    }
+    
+     @include tab {
+         width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/lib-header-tab.png');
+    
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/lib-header-tab@2x.png');
+        }
+     }
+    
+    @include desk {
+        width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/lib-header-pc.png');
+    
+        @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/lib-header-pc@2x.png');
+        }
+    }
+}
+
+.js-log-out-btn:hover{
+    color: #ff6b08;
+}
+
+.js-log-in-btn:hover {
+    color: #ff6b08;
 }

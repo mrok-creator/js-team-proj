@@ -1,6 +1,8 @@
 import { getFromFirebase, removeFromFirebase } from './service/firebase-api'
 import { getFilmDescription } from './service/api';
 import { async } from '@firebase/util';
+import { movieListRef } from './ref';
+
 
 const refs = {
     watchedBtn:document.querySelector('[data-btn="watched"]'),
@@ -11,8 +13,9 @@ const refs = {
     homeA:document.querySelector('[data-a="myLibrary"]'),
     myLibraryBtnContainer:document.querySelector('.buttons__container'),
     inputForm:document.querySelector('.search-form'),
-    gallery:document.querySelector('.list_films'),
-    
+    gallery: document.querySelector('.list_films'),
+    header:document.querySelector('.header')    
+
 };
 
 // =====
@@ -24,6 +27,7 @@ function onClickMyLibraryBtn() {
     changeClass('on', 'off');
     refs.myLibraryBtnContainer.classList.remove('visually-hidden');
     refs.inputForm.classList.add('visually-hidden')
+    refs.header.classList.add('myLib')
 }
 
 function onClickMyHomeBtn() {
@@ -32,7 +36,8 @@ function onClickMyHomeBtn() {
   }
   changeClassA('active-page');
   refs.myLibraryBtnContainer.classList.add('visually-hidden');
-  refs.inputForm.classList.remove('visually-hidden');
+    refs.inputForm.classList.remove('visually-hidden');
+     refs.header.classList.remove('myLib');
 }
 
 function myLibrary() {
@@ -54,38 +59,38 @@ function changeClass(add, remove) {
     refs.queueBtn.classList.remove(add);
 }
 
-async function onClickWatched() {
+function onClickWatched() {
     changeClass('on', 'off');
-    const arrId = await getFromFirebase("watched").then(res => {
-        return res.map(item => getFilmDescription(item))
-    }).then(res => {
-        renderWatched(res);
+    movieListRef.innerHTML = '';
+    getFromFirebase("watched").then(res => {
+     console.log(res)
+        // return res.forEach(async (item) => {
+        //     await getFilmDescription(item)
+        //         .then(render)
+        // })
+        for (let i = 0; i < res.length; i += 1){
+            getFilmDescription(res[i])
+                .then(render)
+        }
     }).catch(console.log)
-    console.log(arrId)
-    // const dataArr = await arrId.map(item => {
-    //     getFilmDescription(item);
-    // }) 
-    
-    // const result = await renderWatched(dataArr);  
-
 }
 
-async function onClickQueue() {
+function onClickQueue() {
     changeClass('off', 'on');
-    const arrId = await getFromFirebase("queued").then(res => {
-        return res.map(item => getFilmDescription(item))
-    }).then(res => {
-        renderQueue(res);
-    }).catch(console.log)
-    console.log(arrId)
+    // getFromFirebase("queued").then(res => {
+    //  console.log(res)
+    //     return res.map(item => {
+    //         getFilmDescription(item)
+    //             .then(render)
+    //     })
+    // }).catch(console.log)
 }
 
 // =====
 
-function renderWatched(newPage) {
+function render(newPage) {
     const markupFunction = arr => {
-  const markup = arr
-    .map(({ title, name, id, genres, poster_path, release_date, vote_average, first_air_date }) => {
+  const { title, name, id, genres, poster_path, release_date, vote_average, first_air_date } = arr
       const poster = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : ' NOT FOUND';
       const filmTitle = title || name;
       const genresCard = genres?.join(', ');
@@ -104,18 +109,23 @@ function renderWatched(newPage) {
                             </div>
                         </a>
                      </li>`;
-    })
-    .join('');
+    }
+    const markup = markupFunction(newPage);
+  
+  movieListRef.insertAdjacentHTML('afterbegin', markup);
 
-  addMarkup(markup);
+
 };
-}
 
 function renderQueue(newPage) {
     
 }
 
+
+
+
 myLibrary();
   
+
 
 
