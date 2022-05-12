@@ -6,7 +6,7 @@ import { pushData } from './service/firebase-api';
 import { getDatabase, ref, push, onValue, get, key } from 'firebase/database';
 import { onClickWatched, onClickQueue } from './my-library';
 import { async } from '@firebase/util';
-
+import Notiflix from 'notiflix';
 const ul = document.querySelector('.list_films');
 ul.addEventListener('click', e => {
   e.preventDefault();
@@ -68,6 +68,7 @@ async function makeButtonAction(id) {
 
       pushData(id, 'watched');
       watched.textContent = 'REMOVE FROM WATCHED';
+      Notiflix.Notify.success("added to watched")
     } else {
 
       watchList.splice(watchList.indexOf(id), 1);
@@ -76,6 +77,7 @@ async function makeButtonAction(id) {
         pushData(e, 'watched');
       });
       watched.textContent = 'ADD TO WATCHED';
+      Notiflix.Notify.success("removed from watched")
     }
     if (Number(localStorage.getItem('libraryOpenFlag'))) {
       onClickWatched();
@@ -100,7 +102,7 @@ async function makeButtonAction(id) {
       queueList.push(id)
       pushData(id, 'queued');
       q.textContent = 'REMOVE FROM  QUEUE';
-
+      Notiflix.Notify.success("added to queue")
     } else {
       queueList.splice(queueList.indexOf(id), 1);
       removeFromFirebase('queued');
@@ -108,6 +110,7 @@ async function makeButtonAction(id) {
         pushData(e, 'queued');
       });
       q.textContent = 'ADD TO QUEUE';
+      Notiflix.Notify.success("removed from queue")
     }
 
     if (Number(localStorage.getItem('libraryOpenFlag'))) {
