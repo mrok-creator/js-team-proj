@@ -78,36 +78,34 @@ function pushData(data, key) {
 
   push(ref(db, key + userId), data)
     .then(() => {
-      console.log(`success`);
-
       // Data saved successfully!
     })
     .catch(error => {
-      console.log(`Error`);
       // The write failed...
     });
 }
 
 function removeFromFirebase(key) {
-  const userId = localStorage.getItem("userId")
-  return remove(ref(db, key + userId))
-    // .then(snapshot => {
-    //   if (snapshot.exists()) {
-    //     return Object.values(snapshot.val());
-    //   } else {
-    //     console.log('No data available');
-    //   }
-    // })
-    .catch(error => {
-      console.error(error);
-    });
+  const userId = localStorage.getItem('userId');
+  return (
+    remove(ref(db, key + userId))
+      // .then(snapshot => {
+      //   if (snapshot.exists()) {
+      //     return Object.values(snapshot.val());
+      //   } else {
+      //     console.log('No data available');
+      //   }
+      // })
+      .catch(error => {
+        console.error(error);
+      })
+  );
 }
 
 function getFromFirebase(key) {
   const userId = localStorage.getItem('userId');
   return get(ref(db, key + userId))
     .then(snapshot => {
-      
       if (snapshot.exists()) {
         return Object.values(snapshot.val());
       } else {
