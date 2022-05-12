@@ -131,6 +131,8 @@
     margin-top: 41px;
     margin-bottom: 64px;
     position: relative;
+    // transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
     @media screen and (min-width: 768px) {
         // margin-top: 43px;
         width: 336px;
@@ -170,6 +172,12 @@
     }
     &__input:focus::placeholder {
         color: transparent;
+    }
+
+    &.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 }
 
