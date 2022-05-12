@@ -1,12 +1,19 @@
 .buttons__container {
     display: flex;
+    
 }
 
 .buttons__container--header {
     position: relative;
-    bottom: 45px;
+    bottom: 75px;
     justify-content: center;
-    transition: opacity 250ms linear, visibility 250ms linear;
+    transition: $cubic-bezier;
+    transition-delay: 50ms;
+    opacity: 1;
+    visibility: visible ;
+    pointer-events: all;
+    
+    
 
     &.is-hidden {
         opacity: 0;
@@ -23,6 +30,7 @@
     padding-left: 8px;
     padding-right: 8px;
     text-align: center;
+    
 
     color: #000000;
     border: 1px solid #000000;
@@ -49,6 +57,7 @@
 }
 
 .myLib{
+    
     @include less-tab {
         width: 100%;
         background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/lib-header-phone.png');

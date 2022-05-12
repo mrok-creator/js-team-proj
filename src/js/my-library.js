@@ -32,8 +32,8 @@ function onClickMyLibraryBtn() {
   }
   changeClassA('active-page');
   changeClass('on', 'off');
-  refs.myLibraryBtnContainer.classList.remove('visually-hidden');
-  refs.inputForm.classList.add('visually-hidden');
+  refs.myLibraryBtnContainer.classList.remove('is-hidden');
+  refs.inputForm.classList.add('is-hidden');
   refs.header.classList.add('myLib');
   onClickWatched();
   flag = 1;
@@ -46,8 +46,8 @@ function onClickMyHomeBtn() {
     return;
   }
   changeClassA('active-page');
-  refs.myLibraryBtnContainer.classList.add('visually-hidden');
-  refs.inputForm.classList.remove('visually-hidden');
+  refs.myLibraryBtnContainer.classList.add('is-hidden');
+  refs.inputForm.classList.remove('is-hidden');
   refs.header.classList.remove('myLib');
   loadPopular();
   flag = 0;
